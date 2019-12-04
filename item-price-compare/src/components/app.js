@@ -1,4 +1,6 @@
 import React from "react";
+import {fetchJSON} from '../functions/http'
+import {leaguesApi, itemsApi} from '../functions/config'
 
 const mapToMetaLeagues = leagues => {
   const tempLeagues = leagues.filter(leagueHash => {
@@ -32,29 +34,8 @@ const leagues = () => {
   return ["Temp SC", "Temp HC", "Standard", "Hardcore"];
 };
 
-const getProxyURL = url => {
-	return `https://c-hive-proxy.herokuapp.com/${url}`;
-};
-
-const fetchJSON = url => {
-  return fetch(url).then(response => {
-    return response.text().then(textResponse => {
-      if (response.ok) {
-        try {
-          return JSON.parse(textResponse);
-        } catch (error) {
-          throw new Error(`Could not JSON parse reponse: ${textResponse}. Error: ${error}`)
-        };
-      } else {
-        throw new Error(`HTTP error: ${response.status} - ${textResponse}`)
-      };
-    });
-  });
-};
-
 const fetchLeagues = () => {
-  const leaguesApi = getProxyURL("http://api.pathofexile.com/leagues?type=main&compact=1");
-  return fetchJSON(leaguesApi).then((leagues) => {
+  return fetchJSON(leaguesApi()).then((leagues) => {
     return mapToMetaLeagues(leagues);
   }).catch((error) => {
     console.error(`Couldn't fetch leagues: ${error}`);
@@ -111,8 +92,7 @@ class App extends React.Component {
 
   fetchItems = (type) => {
     console.log(`Selected league: ${this.state.selectedMetaLeague} - ${this.state.selectedLeague}`);
-    const itemsApi = getProxyURL(`poe.ninja/api/data/${type}?league=${this.state.selectedLeague}`);
-    return fetchJSON(itemsApi).then((items) => {
+    return fetchJSON(itemsApi(type, this.state.selectedLeague)).then((items) => {
       console.log(`Fetched: ${items.lines.length} items`);
       this.setState({ data: items.lines });
     }).catch((error) => {
