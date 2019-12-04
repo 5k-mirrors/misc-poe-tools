@@ -1,18 +1,18 @@
 import React from "react";
 
 const leaguesTransformer = leagues => {
-  let tempLeagues = leagues.filter(leagueHash => {
-    let leagueName = leagueHash["id"];
+  const tempLeagues = leagues.filter(leagueHash => {
+    const leagueName = leagueHash["id"];
     return !(["ssf", "standard"].some(prohibitedWord =>
       leagueName.toLowerCase().includes(prohibitedWord)
     ) || leagueName.toLowerCase() === "hardcore");
   });
 
-  let tempSC = tempLeagues.filter(leagueHash => {
+  const tempSC = tempLeagues.filter(leagueHash => {
     return !leagueHash["id"].toLowerCase().includes("hardcore");
   });
 
-  let tempHC = tempLeagues.filter(leagueHash => {
+  const tempHC = tempLeagues.filter(leagueHash => {
     return leagueHash["id"].toLowerCase().includes("hardcore");
   });
 
@@ -74,7 +74,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let selectedMetaLeague = this.state.selectedMetaLeague;
+    const selectedMetaLeague = this.state.selectedMetaLeague;
 
     fetchLeagues().then((leagues) => {
       console.log(`Leagues: ${JSON.stringify(leagues)}`);
@@ -121,7 +121,7 @@ class App extends React.Component {
         }
       });
     }).then((parsed_response) => {
-      let data = parsed_response.lines;
+      const data = parsed_response.lines;
       console.log(`Fetched: ${data.length} items`);
       this.setState({ data: data });
     }).catch((error) => {
@@ -130,7 +130,7 @@ class App extends React.Component {
   }
 
   leagueSelected = (event) => {
-    let selectedLeague = this.state.leagues[event.target.value];
+    const selectedLeague = this.state.leagues[event.target.value];
     this.setState({ selectedLeague: selectedLeague, selectedMetaLeague: event.target.value }, () => this.fetchItems('getFragmentoverview'));
   };
 
