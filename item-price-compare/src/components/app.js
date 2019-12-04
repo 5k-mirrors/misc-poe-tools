@@ -39,14 +39,18 @@ const getProxyURL = url => {
 const fetchLeagues = () => {
   const fetchUrl = "http://api.pathofexile.com/leagues?type=main&compact=1";
   const apiURL = getProxyURL(fetchUrl);
-  return fetch(apiURL).then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      return response.text().then(textResponse => {
+  return fetch(apiURL).then(response => {
+    return response.text().then(textResponse => {
+      if (response.ok) {
+        try {
+          return JSON.parse(textResponse);
+        } catch (error) {
+          throw new Error(`Could not JSON parse reponse: ${textResponse}. Error: ${error}`)
+        }
+      } else {
         throw new Error(`HTTP error: ${response.status} - ${textResponse}`)
-      })
-    }
+      }
+    });
   }).then((parsedResponse) => {
     return leaguesTransformer(parsedResponse);
   }).catch((error) => {
@@ -64,16 +68,17 @@ class App extends React.Component {
         { name: "Tul pure vs normal", base: "Tul's Pure Breachstone", compare: "Tul's Breachstone" },
         { name: "Xoph pure vs normal", base: "Xoph's Pure Breachstone", compare: "Xoph's Breachstone" },
         { name: "Esh pure vs normal", base: "Esh's Pure Breachstone", compare: "Esh's Breachstone" },
-      ]
+      ],
+      selectedMetaLeague: "Temp SC"
     }
   }
 
   componentDidMount() {
-    let defaultLeague = "Temp SC"
+    let selectedMetaLeague = this.state.selectedMetaLeague;
 
     fetchLeagues().then((leagues) => {
       console.log(`Leagues: ${JSON.stringify(leagues)}`);
-      this.setState({ leagues: leagues, selectedLeague: leagues[defaultLeague] }, () => this.fetchItems('getFragmentoverview'));
+      this.setState({ leagues: leagues, selectedLeague: leagues[selectedMetaLeague] }, () => this.fetchItems('getFragmentoverview'));
     });
   };
 
@@ -81,7 +86,7 @@ class App extends React.Component {
     return (
       <div>
       <h2>League:</h2>
-      <select name="league" value={this.state.selectedLeague} onChange={this.leagueSelected}>
+      <select name="league" value={this.state.selectedMetaLeague} onChange={this.leagueSelected}>
         {leagues().map(item => (
           <option key={item} value={item}>{item}</option>
         ))}
@@ -102,15 +107,19 @@ class App extends React.Component {
   }
 
   fetchItems = (type) => {
-    console.log(`Selected league: ${this.state.selectedLeague}`);
-    return fetch(getProxyURL(`poe.ninja/api/data/${type}?league=${this.state.selectedLeague}`)).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return response.text().then(textResponse => {
+    console.log(`Selected league: ${this.state.selectedMetaLeague} - ${this.state.selectedLeague}`);
+    return fetch(getProxyURL(`poe.ninja/api/data/${type}?league=${this.state.selectedLeague}`)).then(response => {
+      return response.text().then(textResponse => {
+        if (response.ok) {
+          try {
+            return JSON.parse(textResponse);
+          } catch (error) {
+            throw new Error(`Could not JSON parse reponse: ${textResponse}. Error: ${error}`)
+          }
+        } else {
           throw new Error(`HTTP error: ${response.status} - ${textResponse}`)
-        })
-      }
+        }
+      });
     }).then((parsed_response) => {
       let data = parsed_response.lines;
       console.log(`Fetched: ${data.length} items`);
@@ -122,7 +131,7 @@ class App extends React.Component {
 
   leagueSelected = (event) => {
     let selectedLeague = this.state.leagues[event.target.value];
-    this.setState({ selectedLeague: selectedLeague }, () => this.fetchItems('getFragmentoverview'));
+    this.setState({ selectedLeague: selectedLeague, selectedMetaLeague: event.target.value }, () => this.fetchItems('getFragmentoverview'));
   };
 
   compare(base, compare) {
