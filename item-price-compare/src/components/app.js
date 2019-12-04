@@ -40,9 +40,15 @@ const fetchLeagues = () => {
   const fetchUrl = "http://api.pathofexile.com/leagues?type=main&compact=1";
   const apiURL = getProxyURL(fetchUrl);
   return fetch(apiURL).then((response) => {
-    return response.json();
-  }).then((parsed_response) => {
-    return leaguesTransformer(parsed_response);
+    if (response.ok) {
+      return response.json();
+    } else {
+      return response.text().then(textResponse => {
+        throw new Error(`HTTP error: ${response.status} - ${textResponse}`)
+      })
+    }
+  }).then((parsedResponse) => {
+    return leaguesTransformer(parsedResponse);
   }).catch((error) => {
     console.error(`Couldn't fetch leagues: ${error}`);
   });
@@ -67,7 +73,7 @@ class App extends React.Component {
 
     fetchLeagues().then((leagues) => {
       console.log(`Leagues: ${JSON.stringify(leagues)}`);
-      this.setState({ leagues: leagues, selectedLeague: leagues[defaultLeague] }, () => this.fetchData('getFragmentoverview'));
+      this.setState({ leagues: leagues, selectedLeague: leagues[defaultLeague] }, () => this.fetchItems('getFragmentoverview'));
     });
   };
 
@@ -95,22 +101,28 @@ class App extends React.Component {
     )
   }
 
-  fetchData = (type) => {
+  fetchItems = (type) => {
     console.log(`Selected league: ${this.state.selectedLeague}`);
-    return fetch(getProxyURL(`poe.ninja/api/data/${type}?league=${this.state.selectedLeague}`)).then((fetch_response) => {
-      return fetch_response.json().catch((error) => {
-        console.error(`Couldn't parse fetched data: ${error}`);
-      });
+    return fetch(getProxyURL(`poe.ninja/api/data/${type}?league=${this.state.selectedLeague}`)).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return response.text().then(textResponse => {
+          throw new Error(`HTTP error: ${response.status} - ${textResponse}`)
+        })
+      }
     }).then((parsed_response) => {
       let data = parsed_response.lines;
       console.log(`Fetched: ${data.length} items`);
       this.setState({ data: data });
+    }).catch((error) => {
+      console.error(`Couldn't fetch items: ${error}`);
     });
   }
 
   leagueSelected = (event) => {
     let selectedLeague = this.state.leagues[event.target.value];
-    this.setState({ selectedLeague: selectedLeague }, () => this.fetchData('getFragmentoverview'));
+    this.setState({ selectedLeague: selectedLeague }, () => this.fetchItems('getFragmentoverview'));
   };
 
   compare(base, compare) {
