@@ -1,6 +1,6 @@
 import React from "react";
 
-const leaguesTransformer = leagues => {
+const mapToMetaLeagues = leagues => {
   const tempLeagues = leagues.filter(leagueHash => {
     const leagueName = leagueHash["id"];
     return !(["ssf", "standard"].some(prohibitedWord =>
@@ -36,23 +36,26 @@ const getProxyURL = url => {
 	return `https://c-hive-proxy.herokuapp.com/${url}`;
 };
 
-const fetchLeagues = () => {
-  const fetchUrl = "http://api.pathofexile.com/leagues?type=main&compact=1";
-  const apiURL = getProxyURL(fetchUrl);
-  return fetch(apiURL).then(response => {
+const fetchJSON = url => {
+  return fetch(url).then(response => {
     return response.text().then(textResponse => {
       if (response.ok) {
         try {
           return JSON.parse(textResponse);
         } catch (error) {
           throw new Error(`Could not JSON parse reponse: ${textResponse}. Error: ${error}`)
-        }
+        };
       } else {
         throw new Error(`HTTP error: ${response.status} - ${textResponse}`)
-      }
+      };
     });
-  }).then((parsedResponse) => {
-    return leaguesTransformer(parsedResponse);
+  });
+};
+
+const fetchLeagues = () => {
+  const leaguesApi = getProxyURL("http://api.pathofexile.com/leagues?type=main&compact=1");
+  return fetchJSON(leaguesApi).then((leagues) => {
+    return mapToMetaLeagues(leagues);
   }).catch((error) => {
     console.error(`Couldn't fetch leagues: ${error}`);
   });
@@ -108,22 +111,10 @@ class App extends React.Component {
 
   fetchItems = (type) => {
     console.log(`Selected league: ${this.state.selectedMetaLeague} - ${this.state.selectedLeague}`);
-    return fetch(getProxyURL(`poe.ninja/api/data/${type}?league=${this.state.selectedLeague}`)).then(response => {
-      return response.text().then(textResponse => {
-        if (response.ok) {
-          try {
-            return JSON.parse(textResponse);
-          } catch (error) {
-            throw new Error(`Could not JSON parse reponse: ${textResponse}. Error: ${error}`)
-          }
-        } else {
-          throw new Error(`HTTP error: ${response.status} - ${textResponse}`)
-        }
-      });
-    }).then((parsed_response) => {
-      const data = parsed_response.lines;
-      console.log(`Fetched: ${data.length} items`);
-      this.setState({ data: data });
+    const itemsApi = getProxyURL(`poe.ninja/api/data/${type}?league=${this.state.selectedLeague}`);
+    return fetchJSON(itemsApi).then((items) => {
+      console.log(`Fetched: ${items.lines.length} items`);
+      this.setState({ data: items.lines });
     }).catch((error) => {
       console.error(`Couldn't fetch items: ${error}`);
     });
