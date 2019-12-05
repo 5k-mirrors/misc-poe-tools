@@ -56,7 +56,17 @@ const meta = () => {
     fragments: {
       url_path: "getFragmentoverview",
       name_key: "currencyTypeName",
-      price_key: "chaosEquivalent"
-    }
+      compare_key: "chaosEquivalent"
+    },
+    prophecies: {
+      url_path: "GetProphecyOverview",
+      name_key: "name",
+      compare_key: "chaosValue"
+    },
+    accessories: {
+      url_path: "GetUniqueAccessoryOverview",
+      name_key: "name",
+      compare_key: "chaosValue"
+    },
   }
 };

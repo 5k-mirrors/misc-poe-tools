@@ -13,6 +13,7 @@ export const comparisons = () => {
     { name: "Tul pure vs normal", base: "Tul's Pure Breachstone", compare: "Tul's Breachstone" },
     { name: "Xoph pure vs normal", base: "Xoph's Pure Breachstone", compare: "Xoph's Breachstone" },
     { name: "Esh pure vs normal", base: "Esh's Pure Breachstone", compare: "Esh's Breachstone" },
+    { name: "Kaom's Way vs Kaom's Sign", base: "Kaom's Way", compare: "Kaom's Sign" },
   ];
 };
 
