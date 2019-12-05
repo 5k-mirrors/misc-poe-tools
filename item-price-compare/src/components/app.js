@@ -1,7 +1,7 @@
 import React from "react";
 import {comparisons} from '../functions/config'
 import {metaLeagues, fetchLeagues} from '../functions/leagues'
-import {fetchItems, find} from '../functions/items'
+import {fetchItems, comparePrice} from '../functions/items'
 
 class App extends React.Component {
   constructor(props) {
@@ -61,17 +61,14 @@ class App extends React.Component {
       return "?";
     };
 
-    const compare_key = "chaosEquivalent";
+    const comparison = comparePrice(this.state.items, this.state.selectedLeague, base, compare);
 
-  	const base_item = find(this.state.items, this.state.selectedLeague, base);
-    const compare_item = find(this.state.items, this.state.selectedLeague, compare);
-
-    if(!base_item || !compare_item) {
+    if(!comparison) {
       return "N/A";
+    } else {
+      return comparison;
     };
-
-  	return Math.round(base_item[compare_key] - compare_item[compare_key]);
-  }
+  };
 }
 
 export default App;
