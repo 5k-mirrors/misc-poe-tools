@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      comparisons: comparisons(),
+      comparisonsByGroup: comparisons(),
       selectedMetaLeague: "Temp SC",
     };
   }
@@ -25,12 +25,14 @@ class App extends React.Component {
   }
 
   render() {
+    const { selectedMetaLeague, comparisonsByGroup } = this.state;
+
     return (
       <div>
         <h2>League:</h2>
         <select
           name="league"
-          value={this.state.selectedMetaLeague}
+          value={selectedMetaLeague}
           onChange={event => this.leagueSelected(event)}
         >
           {metaLeagues().map(league => (
@@ -42,10 +44,15 @@ class App extends React.Component {
 
         <h2>Differences:</h2>
         <ol>
-          {this.state.comparisons.map((comparison, i) => (
-            <li key={i}>
-              <label>{this.comparisonText(comparison)}</label>
-            </li>
+          {Object.keys(comparisonsByGroup).map(group => (
+            <div key={group}>
+              <h3>{group}</h3>
+              {comparisonsByGroup[group].map((comparison, i) => (
+                <li key={i}>
+                  <label>{this.comparisonText(comparison)}</label>
+                </li>
+              ))}
+            </div>
           ))}
         </ol>
       </div>
