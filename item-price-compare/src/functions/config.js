@@ -47,5 +47,25 @@ export const comparisons = () => {
         comment: "location: Kaom's Stronghold (Act 4)",
       },
     ],
+    "Divination cards vs. outcome": [
+      {
+        name: "The Hoarder",
+        base: "Exalted Orb",
+        compare: [
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+          "The Hoarder",
+        ],
+      },
+    ],
   };
 };

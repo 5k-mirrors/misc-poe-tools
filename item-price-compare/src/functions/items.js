@@ -18,6 +18,16 @@ const meta = () => {
       name_key: "name",
       compare_key: "chaosValue",
     },
+    divination_cards: {
+      url_path: "GetDivinationCardsOverview",
+      name_key: "name",
+      compare_key: "chaosValue",
+    },
+    currency: {
+      url_path: "GetCurrencyOverview",
+      name_key: "currencyTypeName",
+      compare_key: "chaosEquivalent",
+    },
   };
 };
 
