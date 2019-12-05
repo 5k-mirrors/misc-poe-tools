@@ -33,16 +33,25 @@ class App extends React.Component {
 
       <h2>Differences:</h2>
         <ol>
-        {this.state.comparisons.map((comparison, i) => (
-          <li key={i}>
-            <label>
-              <span>{comparison.name}: {this.compare(comparison.base, comparison.compare)} chaos ({comparison.comment})</span>
-            </label>
-          </li>
-        ))}
+          {this.state.comparisons.map((comparison, i) => (
+            <li key={i}>
+              <label>
+                {this.comparisonText(comparison)}
+              </label>
+            </li>
+          ))}
         </ol>
       </div>
     )
+  }
+
+  comparisonText(comparison) {
+    let text = `${comparison.name}: ${this.compare(comparison.base, comparison.compare)} chaos`;
+    if(comparison.comment) {
+      text = text + ` (${comparison.comment})`;
+    };
+
+    return text
   }
 
   updateItems = () => {
