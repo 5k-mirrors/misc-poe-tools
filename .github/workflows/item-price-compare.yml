@@ -43,5 +43,5 @@ jobs:
           ${{ runner.OS }}-item-price-compare-
     - name: Install NPM dependencies
       run: cd item-price-compare && yarn install
-    - name: Lint
+    - name: Build
       run: cd item-price-compare && yarn build
