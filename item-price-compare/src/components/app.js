@@ -1,19 +1,13 @@
 import React from "react";
 import {fetchJSON} from '../functions/http'
-import {itemsApi} from '../functions/config'
+import {itemsApi, comparisons} from '../functions/config'
 import {metaLeagues, fetchLeagues} from '../functions/leagues'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: [
-      	{ name: "Chayula pure vs normal", base: "Chayula's Pure Breachstone", compare: "Chayula's Breachstone" },
-        { name: "Uul-Netol pure vs normal", base: "Uul-Netol's Pure Breachstone", compare: "Uul-Netol's Breachstone" },
-        { name: "Tul pure vs normal", base: "Tul's Pure Breachstone", compare: "Tul's Breachstone" },
-        { name: "Xoph pure vs normal", base: "Xoph's Pure Breachstone", compare: "Xoph's Breachstone" },
-        { name: "Esh pure vs normal", base: "Esh's Pure Breachstone", compare: "Esh's Breachstone" },
-      ],
+      comparisons: comparisons(),
       selectedMetaLeague: "Temp SC"
     }
   }
@@ -32,17 +26,17 @@ class App extends React.Component {
       <div>
       <h2>League:</h2>
       <select name="league" value={this.state.selectedMetaLeague} onChange={this.leagueSelected}>
-        {metaLeagues().map(item => (
-          <option key={item} value={item}>{item}</option>
+        {metaLeagues().map(league => (
+          <option key={league} value={league}>{league}</option>
         ))}
       </select>
 
       <h2>Differences:</h2>
         <ol>
-        {this.state.items.map((item, i) => (
+        {this.state.comparisons.map((comparison, i) => (
           <li key={i}>
             <label>
-              <span>{item.name}: {this.compare(item.base, item.compare)} chaos</span>
+              <span>{comparison.name}: {this.compare(comparison.base, comparison.compare)} chaos</span>
             </label>
           </li>
         ))}
