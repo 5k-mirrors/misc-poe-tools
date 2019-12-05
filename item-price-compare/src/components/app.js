@@ -49,7 +49,7 @@ class App extends React.Component {
     console.log(`Selected league: ${this.state.selectedMetaLeague} - ${this.state.selectedLeague}`);
     return fetchJSON(itemsApi(type, this.state.selectedLeague)).then((items) => {
       console.log(`Fetched: ${items.lines.length} items`);
-      this.setState({ data: items.lines });
+      this.setState({ items: items.lines });
     }).catch((error) => {
       console.error(`Couldn't fetch items: ${error}`);
     });
@@ -61,15 +61,15 @@ class App extends React.Component {
   };
 
   compare(base, compare) {
-  	if(!this.state.data) {
+  	if(!this.state.items) {
       return "?";
     };
 
   	const find_key = "currencyTypeName";
     const compare_key = "chaosEquivalent";
 
-  	const base_item = this.find(this.state.data, find_key, base);
-    const compare_item = this.find(this.state.data, find_key, compare);
+  	const base_item = this.find(this.state.items, find_key, base);
+    const compare_item = this.find(this.state.items, find_key, compare);
 
     if(!base_item || !compare_item) {
       return "N/A";
