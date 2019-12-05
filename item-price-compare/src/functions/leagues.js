@@ -1,7 +1,7 @@
 import {leaguesApi} from './config'
 import {fetchJSON} from './http'
 
-export const leagues = () => {
+export const metaLeagues = () => {
   return ["Temp SC", "Temp HC", "Standard", "Hardcore"];
 };
 

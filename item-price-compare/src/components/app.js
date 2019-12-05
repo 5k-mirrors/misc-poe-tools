@@ -1,7 +1,7 @@
 import React from "react";
 import {fetchJSON} from '../functions/http'
 import {itemsApi} from '../functions/config'
-import {leagues, fetchLeagues} from '../functions/leagues'
+import {metaLeagues, fetchLeagues} from '../functions/leagues'
 
 class App extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class App extends React.Component {
       <div>
       <h2>League:</h2>
       <select name="league" value={this.state.selectedMetaLeague} onChange={this.leagueSelected}>
-        {leagues().map(item => (
+        {metaLeagues().map(item => (
           <option key={item} value={item}>{item}</option>
         ))}
       </select>
