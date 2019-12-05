@@ -12,36 +12,36 @@ export const itemsApi = (type, league) => {
 
 export const comparisons = () => {
   return {
-    Breachstones: [
+    "Pure vs. normal Breachstones": [
       {
-        name: "Chayula pure vs normal",
+        name: "Chayula",
         base: "Chayula's Pure Breachstone",
         compare: ["Chayula's Breachstone"],
       },
       {
-        name: "Uul-Netol pure vs normal",
+        name: "Uul-Netol",
         base: "Uul-Netol's Pure Breachstone",
         compare: ["Uul-Netol's Breachstone"],
       },
       {
-        name: "Tul pure vs normal",
+        name: "Tul",
         base: "Tul's Pure Breachstone",
         compare: ["Tul's Breachstone"],
       },
       {
-        name: "Xoph pure vs normal",
+        name: "Xoph",
         base: "Xoph's Pure Breachstone",
         compare: ["Xoph's Breachstone"],
       },
       {
-        name: "Esh pure vs normal",
+        name: "Esh",
         base: "Esh's Pure Breachstone",
         compare: ["Esh's Breachstone"],
       },
     ],
-    "Prophecy uniques": [
+    "Fated uniques vs. their base + prophecy": [
       {
-        name: "Kaom's Way vs Kaom's Sign",
+        name: "Kaom's Way",
         base: "Kaom's Way",
         compare: ["Kaom's Sign", "The King's Path"],
         comment: "location: Kaom's Stronghold (Act 4)",
