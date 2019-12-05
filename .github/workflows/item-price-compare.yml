@@ -3,8 +3,8 @@ name: Item price compare
 on: [push]
 
 jobs:
-  lint:
 
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,9 +25,7 @@ jobs:
     - name: Lint
       run: cd item-price-compare && yarn lint
 
-jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
