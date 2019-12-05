@@ -1,7 +1,6 @@
 module.exports = {
   env: {
-    browser: true,
-    es6: true
+    browser: true, // To not get warning about functions available in the browser, e.g. `fetch`
   },
   extends: [
     "airbnb-base",
