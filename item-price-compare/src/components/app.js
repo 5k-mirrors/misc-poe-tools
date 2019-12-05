@@ -36,7 +36,7 @@ class App extends React.Component {
         {this.state.comparisons.map((comparison, i) => (
           <li key={i}>
             <label>
-              <span>{comparison.name}: {this.compare(comparison.base, comparison.compare)} chaos</span>
+              <span>{comparison.name}: {this.compare(comparison.base, comparison.compare)} chaos ({comparison.comment})</span>
             </label>
           </li>
         ))}
