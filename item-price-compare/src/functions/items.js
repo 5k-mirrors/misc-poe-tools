@@ -21,16 +21,24 @@ export const fetchItems = (league) => {
   });
 }
 
-export const comparePrice = (items, league, baseName, compareName) => {
+export const comparePrice = (items, league, baseName, compareNames) => {
   const baseItem = find(items, league, baseName);
-  const compareItem = find(items, league, compareName);
+  const compareItems = compareNames.map((compareName) => {
+    return find(items, league, compareName);
+  });
 
-  if(!baseItem || !compareItem) return;
+  if(baseItem === undefined || compareItems.some(item => item === undefined)) return;
 
   const baseItemCompareKey = meta()[baseItem["type"]]["compare_key"];
-  const compareItemCompareKey = meta()[compareItem["type"]]["compare_key"];
 
-  return Math.round(baseItem[baseItemCompareKey] - compareItem[compareItemCompareKey]);
+  let value = baseItem[baseItemCompareKey];
+
+  for (const compareItem of compareItems) {
+    const compareItemCompareKey = meta()[compareItem["type"]]["compare_key"];
+    value = value - compareItem[compareItemCompareKey];
+  }
+
+  return Math.round(value);
 };
 
 const find = (items, league, name) => {
