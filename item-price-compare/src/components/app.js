@@ -1,7 +1,7 @@
 import React from "react";
-import {fetchJSON} from '../functions/http'
-import {itemsApi, comparisons} from '../functions/config'
+import {comparisons} from '../functions/config'
 import {metaLeagues, fetchLeagues} from '../functions/leagues'
+import {fetchItems, find} from '../functions/items'
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class App extends React.Component {
 
     fetchLeagues().then((leagues) => {
       console.log(`Leagues: ${JSON.stringify(leagues)}`);
-      this.setState({ leagues: leagues, selectedLeague: leagues[selectedMetaLeague] }, () => this.fetchItems('getFragmentoverview'));
+      this.setState({ leagues: leagues, selectedLeague: leagues[selectedMetaLeague] }, () => this.updateItems());
     });
   };
 
@@ -45,43 +45,32 @@ class App extends React.Component {
     )
   }
 
-  fetchItems = (type) => {
-    console.log(`Selected league: ${this.state.selectedMetaLeague} - ${this.state.selectedLeague}`);
-    return fetchJSON(itemsApi(type, this.state.selectedLeague)).then((items) => {
-      console.log(`Fetched: ${items.lines.length} items`);
-      this.setState({ items: items.lines });
-    }).catch((error) => {
-      console.error(`Couldn't fetch items: ${error}`);
+  updateItems = () => {
+    fetchItems(this.state.selectedLeague).then(items => {
+      this.setState({ items: items });
     });
-  }
+  };
 
   leagueSelected = (event) => {
     const selectedLeague = this.state.leagues[event.target.value];
-    this.setState({ selectedLeague: selectedLeague, selectedMetaLeague: event.target.value }, () => this.fetchItems('getFragmentoverview'));
+    this.setState({ selectedLeague: selectedLeague, selectedMetaLeague: event.target.value }, () => this.updateItems());
   };
 
   compare(base, compare) {
-  	if(!this.state.items) {
+  	if(!this.state.selectedLeague || !this.state.items || !this.state.items[this.state.selectedLeague]) {
       return "?";
     };
 
-  	const find_key = "currencyTypeName";
     const compare_key = "chaosEquivalent";
 
-  	const base_item = this.find(this.state.items, find_key, base);
-    const compare_item = this.find(this.state.items, find_key, compare);
+  	const base_item = find(this.state.items, this.state.selectedLeague, base);
+    const compare_item = find(this.state.items, this.state.selectedLeague, compare);
 
     if(!base_item || !compare_item) {
       return "N/A";
     };
 
   	return Math.round(base_item[compare_key] - compare_item[compare_key]);
-  }
-  
-  find(data, key, name) {
-  	return data.filter((elem) => {
-    	return elem[key] === name
-    })[0]
   }
 }
 
