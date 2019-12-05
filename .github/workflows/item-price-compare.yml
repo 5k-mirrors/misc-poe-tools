@@ -1,0 +1,49 @@
+name: Item price compare
+
+on: [push]
+
+jobs:
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 8
+      uses: actions/setup-node@v1
+      with:
+        node-version: 8.x
+    - name: Cache NPM dependencies
+      uses: actions/cache@v1
+      with:
+        path: item-price-compare/node_modules
+        key: ${{ runner.OS }}-item-price-compare-${{ hashFiles('**/item-price-compare/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.OS }}-item-price-compare-
+    - name: Install NPM dependencies
+      run: cd item-price-compare && yarn install
+    - name: Lint
+      run: cd item-price-compare && yarn lint
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 8
+      uses: actions/setup-node@v1
+      with:
+        node-version: 8.x
+    - name: Cache NPM dependencies
+      uses: actions/cache@v1
+      with:
+        path: item-price-compare/node_modules
+        key: ${{ runner.OS }}-item-price-compare-${{ hashFiles('**/item-price-compare/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.OS }}-item-price-compare-
+    - name: Install NPM dependencies
+      run: cd item-price-compare && yarn install
+    - name: Lint
+      run: cd item-price-compare && yarn build
