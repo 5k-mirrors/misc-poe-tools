@@ -39,17 +39,9 @@ export const comparisons = () => {
         compare: ["Esh's Breachstone"],
       },
     ],
-    "Fated uniques vs. their base + prophecy": [
-      {
-        name: "Kaom's Way",
-        base: ["Kaom's Way"],
-        compare: ["Kaom's Sign", "The King's Path"],
-        comment: "location: Kaom's Stronghold (Act 4)",
-      },
-    ],
     "Divination cards vs. outcome": [
       {
-        name: "The Hoarder",
+        name: "The Hoarder (Exalted Orb)",
         base: ["Exalted Orb"],
         compare: [
           "The Hoarder",
@@ -67,7 +59,7 @@ export const comparisons = () => {
         ],
       },
       {
-        name: "Abandoned Wealth",
+        name: "Abandoned Wealth (3x Exalted Orb)",
         base: ["Exalted Orb", "Exalted Orb", "Exalted Orb"],
         compare: [
           "Abandoned Wealth",
@@ -76,6 +68,32 @@ export const comparisons = () => {
           "Abandoned Wealth",
           "Abandoned Wealth",
         ],
+      },
+      {
+        name: "Nook's Crown (Elder Bone Helmet ilvl100)",
+        base: ["bone-helmet-86-elder"],
+        compare: [
+          "Nook's Crown",
+          "Nook's Crown",
+          "Nook's Crown",
+          "Nook's Crown",
+        ],
+      },
+    ],
+    "Fated uniques vs. their base + prophecy": [
+      {
+        name: "Kaom's Way",
+        base: ["Kaom's Way"],
+        compare: ["Kaom's Sign", "The King's Path"],
+        comment: "location: Kaom's Stronghold (Act 4)",
+      },
+    ],
+    "Prophecy rewards": [
+      {
+        name: "Volkuur's Key",
+        base: ["Volkuur's Key"],
+        compare: ["The Unbreathing Queen V", "Cemetery Map"],
+        comment: "location: Cemetery Map",
       },
     ],
   };

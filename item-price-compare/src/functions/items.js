@@ -23,10 +23,20 @@ const meta = () => {
       name_key: "name",
       compare_key: "chaosValue",
     },
-    currency: {
+    currencies: {
       url_path: "GetCurrencyOverview",
       name_key: "currencyTypeName",
       compare_key: "chaosEquivalent",
+    },
+    base_types: {
+      url_path: "GetBaseTypeOverview",
+      name_key: "detailsId",
+      compare_key: "chaosValue",
+    },
+    maps: {
+      url_path: "GetMapOverview",
+      name_key: "name",
+      compare_key: "chaosValue",
     },
   };
 };

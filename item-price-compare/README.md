@@ -8,7 +8,105 @@ https://codesandbox.io/s/github/5k-mirrors/misc-poe-tools/tree/master/item-price
 
 #### API response examples
 
-Currency:
+Maps:
+
+https://poe.ninja/api/data/GetMapOverview?league=Standard
+```json
+"lines": [
+  {
+    "id": 2458,
+    "name": "Shrine Map",
+    "icon": "https://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Shrine.png?scale=1&scaleIndex=0&w=1&h=1&mn=2&mt=13",
+    "mapTier": 13,
+    "levelRequired": 0,
+    "baseType": "Shrine Map",
+    "stackSize": 0,
+    "variant": "Atlas2",
+    "prophecyText": null,
+    "artFilename": null,
+    "links": 0,
+    "itemClass": 0,
+    "sparkline": {
+      "data": [],
+      "totalChange": 0
+    },
+    "lowConfidenceSparkline": {
+      "data": [
+        0,
+        0.04,
+        0.25,
+        0.24,
+        0.23,
+        0,
+        -0.15
+      ],
+      "totalChange": -0.15
+    },
+    "implicitModifiers": [],
+    "explicitModifiers": [],
+    "flavourText": "",
+    "corrupted": false,
+    "gemLevel": 0,
+    "gemQuality": 0,
+    "itemType": "Unknown",
+    "chaosValue": 51332.64,
+    "exaltedValue": 298.39,
+    "count": 1,
+    "detailsId": "shrine-map-atlas2"
+  },
+]
+```
+
+Base types:
+
+https://poe.ninja/api/data/GetBaseTypeOverview?league=Standard
+```json
+"lines": [
+  {
+    "id": 15361,
+    "name": "Stygian Vise",
+    "icon": "https://web.poecdn.com/image/Art/2DItems/Belts/AbyssBelt.png?scale=1&scaleIndex=0&w=2&h=1",
+    "mapTier": 0,
+    "levelRequired": 82,
+    "baseType": "Stygian Vise",
+    "stackSize": 0,
+    "variant": "Shaper",
+    "prophecyText": null,
+    "artFilename": null,
+    "links": 0,
+    "itemClass": 2,
+    "sparkline": {
+      "data": [],
+      "totalChange": 0
+    },
+    "lowConfidenceSparkline": {
+      "data": [
+        0,
+        36.76,
+        36.88,
+        37.06,
+        -26.37,
+        -26.71,
+        33.56
+      ],
+      "totalChange": 33.56
+    },
+    "implicitModifiers": [],
+    "explicitModifiers": [],
+    "flavourText": "",
+    "corrupted": false,
+    "gemLevel": 0,
+    "gemQuality": 0,
+    "itemType": "Belt",
+    "chaosValue": 68678.96,
+    "exaltedValue": 399.23,
+    "count": 3,
+    "detailsId": "stygian-vise-82-shaper"
+  },
+]
+```
+
+Currencies:
 
 https://poe.ninja/api/data/GetCurrencyOverview?league=Standard
 ```json
