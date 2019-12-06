@@ -1,7 +1,7 @@
 import React from "react";
 import { comparisons } from "../functions/config";
 import { metaLeagues, fetchLeagues } from "../functions/leagues";
-import { fetchItems, comparePrice } from "../functions/items";
+import { fetchItems, comparePrice, cost } from "../functions/items";
 
 class App extends React.Component {
   constructor(props) {
@@ -60,10 +60,27 @@ class App extends React.Component {
   }
 
   comparisonText(comparison) {
-    let text = `${comparison.name}: ${this.compare(
+    let text = `${comparison.name}: `;
+
+    if (
+      !this.state.selectedLeague ||
+      !this.state.items ||
+      !this.state.items[this.state.selectedLeague]
+    ) {
+      text += "?";
+      return text;
+    }
+
+    text += `${this.compareText(
       comparison.base,
       comparison.compare
-    )} chaos`;
+    )} chaos profit`;
+
+    if (comparison.compare.length !== 0)
+      text += `, cost: ${this.costText(comparison.compare)}, pieces: ${
+        comparison.compare.length
+      }`;
+
     if (comparison.comment) {
       text += ` (${comparison.comment})`;
     }
@@ -88,15 +105,16 @@ class App extends React.Component {
     );
   }
 
-  compare(base, compare) {
-    if (
-      !this.state.selectedLeague ||
-      !this.state.items ||
-      !this.state.items[this.state.selectedLeague]
-    ) {
-      return "?";
-    }
+  costText(names) {
+    const costText = cost(this.state.items, this.state.selectedLeague, names);
 
+    if (!costText) {
+      return "N/A";
+    }
+    return costText;
+  }
+
+  compareText(base, compare) {
     const comparison = comparePrice(
       this.state.items,
       this.state.selectedLeague,

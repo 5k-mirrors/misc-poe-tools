@@ -81,6 +81,23 @@ const find = (items, league, name) => {
   return foundItem;
 };
 
+export const cost = (items, league, names) => {
+  const foundItems = names.map(name => {
+    return find(items, league, name);
+  });
+
+  if (foundItems.some(item => item === undefined)) return null;
+
+  let value = 0;
+
+  for (const item of foundItems) {
+    const compareKey = meta()[item.type].compare_key;
+    value += item[compareKey];
+  }
+
+  return Math.round(value);
+};
+
 export const comparePrice = (items, league, baseNames, compareNames) => {
   const baseItems = baseNames.map(baseName => {
     return find(items, league, baseName);
