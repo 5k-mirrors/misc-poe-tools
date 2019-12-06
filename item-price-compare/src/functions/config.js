@@ -96,5 +96,12 @@ export const comparisons = () => {
         comment: "location: Cemetery Map",
       },
     ],
+    "Item prices": [
+      {
+        name: "Exalted Orb",
+        base: ["Exalted Orb"],
+        compare: [],
+      },
+    ],
   };
 };
