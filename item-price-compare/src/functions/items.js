@@ -85,7 +85,6 @@ export const comparePrice = (items, league, baseNames, compareNames) => {
   const baseItems = baseNames.map(baseName => {
     return find(items, league, baseName);
   });
-  // const baseItem = find(items, league, baseName);
   const compareItems = compareNames.map(compareName => {
     return find(items, league, compareName);
   });
@@ -96,9 +95,7 @@ export const comparePrice = (items, league, baseNames, compareNames) => {
   )
     return null;
 
-  // const baseItemCompareKey = meta()[baseItem.type].compare_key;
-
-  let value = 0; //= baseItem[baseItemCompareKey];
+  let value = 0;
 
   for (const baseItem of baseItems) {
     const baseItemCompareKey = meta()[baseItem.type].compare_key;
