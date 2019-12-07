@@ -3,38 +3,45 @@ import { itemsApi } from "./config";
 
 const meta = () => {
   return {
+    currencies: {
+      category: "currency",
+      type: "Currency",
+      name_key: "currencyTypeName",
+      compare_key: "chaosEquivalent",
+    },
     fragments: {
-      url_path: "getFragmentoverview",
+      category: "currency",
+      type: "Fragment",
       name_key: "currencyTypeName",
       compare_key: "chaosEquivalent",
     },
     prophecies: {
-      url_path: "GetProphecyOverview",
+      category: "item",
+      type: "Prophecy",
       name_key: "name",
       compare_key: "chaosValue",
     },
     accessories: {
-      url_path: "GetUniqueAccessoryOverview",
+      category: "item",
+      type: "UniqueAccessory",
       name_key: "name",
       compare_key: "chaosValue",
     },
     divination_cards: {
-      url_path: "GetDivinationCardsOverview",
+      category: "item",
+      type: "DivinationCard",
       name_key: "name",
       compare_key: "chaosValue",
     },
-    currencies: {
-      url_path: "GetCurrencyOverview",
-      name_key: "currencyTypeName",
-      compare_key: "chaosEquivalent",
-    },
     base_types: {
-      url_path: "GetBaseTypeOverview",
+      category: "item",
+      type: "BaseType",
       name_key: "detailsId",
       compare_key: "chaosValue",
     },
     maps: {
-      url_path: "GetMapOverview",
+      category: "item",
+      type: "Map",
       name_key: "name",
       compare_key: "chaosValue",
     },
@@ -47,7 +54,7 @@ export const fetchItems = league => {
 
   return Promise.all(
     Object.entries(meta()).map(([type, details]) => {
-      const url = itemsApi(details.url_path, league);
+      const url = itemsApi(details.type, details.category, league);
       console.log(`Fetching ${type} items for ${league} league from ${url}`);
       return fetchJSON(url)
         .then(itemsForLeague => {

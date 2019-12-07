@@ -6,8 +6,10 @@ export const leaguesApi = () => {
   return proxy("http://api.pathofexile.com/leagues?type=main&compact=1");
 };
 
-export const itemsApi = (type, league) => {
-  return proxy(`poe.ninja/api/data/${type}?league=${league}`);
+export const itemsApi = (type, category, league) => {
+  return proxy(
+    `https://poe.ninja/api/data/${category}overview?league=${league}&type=${type}`
+  );
 };
 
 export const comparisons = () => {
