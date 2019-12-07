@@ -29,6 +29,7 @@ class App extends React.Component {
 
     return (
       <div>
+        <h1>PoE - What to flip?</h1>
         <select
           name="league"
           value={selectedMetaLeague}

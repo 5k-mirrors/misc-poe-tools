@@ -16,14 +16,14 @@ jobs:
     - name: Cache NPM dependencies
       uses: actions/cache@v1
       with:
-        path: item-price-compare/node_modules
-        key: ${{ runner.OS }}-item-price-compare-${{ hashFiles('**/item-price-compare/yarn.lock') }}
+        path: what-to-flip/node_modules
+        key: ${{ runner.OS }}-what-to-flip-${{ hashFiles('**/what-to-flip/yarn.lock') }}
         restore-keys: |
-          ${{ runner.OS }}-item-price-compare-
+          ${{ runner.OS }}-what-to-flip-
     - name: Install NPM dependencies
-      run: cd item-price-compare && yarn install
+      run: cd what-to-flip && yarn install
     - name: Lint
-      run: cd item-price-compare && yarn lint
+      run: cd what-to-flip && yarn lint
 
   build:
     runs-on: ubuntu-latest
@@ -37,11 +37,11 @@ jobs:
     - name: Cache NPM dependencies
       uses: actions/cache@v1
       with:
-        path: item-price-compare/node_modules
-        key: ${{ runner.OS }}-item-price-compare-${{ hashFiles('**/item-price-compare/yarn.lock') }}
+        path: what-to-flip/node_modules
+        key: ${{ runner.OS }}-what-to-flip-${{ hashFiles('**/what-to-flip/yarn.lock') }}
         restore-keys: |
-          ${{ runner.OS }}-item-price-compare-
+          ${{ runner.OS }}-what-to-flip-
     - name: Install NPM dependencies
-      run: cd item-price-compare && yarn install
+      run: cd what-to-flip && yarn install
     - name: Build
-      run: cd item-price-compare && yarn build
+      run: cd what-to-flip && yarn build
