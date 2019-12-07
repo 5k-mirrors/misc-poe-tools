@@ -92,6 +92,86 @@ export const comparisons = () => {
         comment: "location: Cemetery Map",
       },
     ],
+    "Gilded Scarabs": [
+      {
+        name: "Sulphite",
+        base: ["Gilded Sulphite Scarab"],
+        compare: [],
+        comment: "Cameria",
+      },
+      {
+        name: "Legion",
+        base: ["Gilded Legion Scarab"],
+        compare: [],
+        comment: "Vagan",
+      },
+      {
+        name: "Harbinger",
+        base: ["Gilded Harbinger Scarab"],
+        compare: [],
+        comment: "Tora",
+      },
+      {
+        name: "Bestiary",
+        base: ["Gilded Bestiary Scarab"],
+        compare: [],
+        comment: "Jorgin",
+      },
+      {
+        name: "Divination",
+        base: ["Gilded Divination Scarab"],
+        compare: [],
+        comment: "Gravicius",
+      },
+      {
+        name: "Cartography",
+        base: ["Gilded Cartography Scarab"],
+        compare: [],
+        comment: "Rin",
+      },
+      {
+        name: "Torment",
+        base: ["Gilded Torment Scarab"],
+        compare: [],
+        comment: "Leo",
+      },
+      {
+        name: "Shaper",
+        base: ["Gilded Shaper Scarab"],
+        compare: [],
+        comment: "Vorici",
+      },
+      {
+        name: "Elder",
+        base: ["Gilded Elder Scarab"],
+        compare: [],
+        comment: "Korell",
+      },
+      {
+        name: "Reliquary",
+        base: ["Gilded Reliquary Scarab"],
+        compare: [],
+        comment: "Elreon",
+      },
+      {
+        name: "Breach",
+        base: ["Gilded Breach Scarab"],
+        compare: [],
+        comment: "It That Fled",
+      },
+      {
+        name: "Ambush",
+        base: ["Gilded Ambush Scarab"],
+        compare: [],
+        comment: "Haku",
+      },
+      {
+        name: "Perandus",
+        base: ["Gilded Perandus Scarab"],
+        compare: [],
+        comment: "Janus",
+      },
+    ],
     "Item prices": [
       {
         name: "Exalted Orb",

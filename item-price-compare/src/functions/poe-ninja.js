@@ -46,6 +46,11 @@ export const typeConfigByCategory = () => {
         name_key: "name",
         compare_key: "chaosValue",
       },
+      scarabs: {
+        type: "Scarab",
+        name_key: "name",
+        compare_key: "chaosValue",
+      },
     },
   };
 };
