@@ -29,7 +29,6 @@ class App extends React.Component {
 
     return (
       <div>
-        <h2>League:</h2>
         <select
           name="league"
           value={selectedMetaLeague}
@@ -42,11 +41,10 @@ class App extends React.Component {
           ))}
         </select>
 
-        <h2>Differences:</h2>
         <ol>
           {Object.keys(comparisonsByGroup).map(group => (
             <div key={group}>
-              <h3>{group}</h3>
+              <h2>{group}</h2>
               {comparisonsByGroup[group].map((comparison, i) => (
                 <li key={i}>
                   <label>{this.comparisonText(comparison)}</label>
@@ -76,10 +74,12 @@ class App extends React.Component {
       comparison.compare
     )} chaos profit`;
 
-    if (comparison.compare.length !== 0)
-      text += `, cost: ${this.costText(comparison.compare)} chaos, pieces: ${
-        comparison.compare.length
-      }`;
+    const pieces = comparison.compare.length;
+
+    if (pieces !== 0)
+      text += `, cost: ${this.costText(
+        comparison.compare
+      )} chaos, pieces: ${pieces}`;
 
     if (comparison.comment) {
       text += ` (${comparison.comment})`;
