@@ -1,13 +1,86 @@
-## `poe.ninja` API response examples
+# `poe.ninja` API
 
-See also:
+| Category | API |
+| -------- | --- |
+| Currency | https://poe.ninja/api/data/currencyoverview?league=Blight&type=Currency |
+| Fragment | https://poe.ninja/api/data/currencyoverview?league=Blight&type=Fragment |
+| Oils | https://poe.ninja/api/data/itemoverview?league=Blight&type=Oil |
+| Incubators | https://poe.ninja/api/data/itemoverview?league=Blight&type=Incubator |
+| Scarabs | https://poe.ninja/api/data/itemoverview?league=Blight&type=Scarab |
+| Fossils | https://poe.ninja/api/data/itemoverview?league=Blight&type=Fossil |
+| Resonators | https://poe.ninja/api/data/itemoverview?league=Blight&type=Resonator |
+| Essence | https://poe.ninja/api/data/itemoverview?league=Blight&type=Essence |
+| Divination Cards | https://poe.ninja/api/data/itemoverview?league=Blight&type=DivinationCard |
+| Prophecies | https://poe.ninja/api/data/itemoverview?league=Blight&type=Prophecy |
+| Skill Gems | https://poe.ninja/api/data/itemoverview?league=Blight&type=SkillGem |
+| Base Types | https://poe.ninja/api/data/itemoverview?league=Blight&type=BaseType |
+| Helmet Enchants | https://poe.ninja/api/data/itemoverview?league=Blight&type=HelmetEnchant |
+| Unique Maps | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueMap |
+| Maps | https://poe.ninja/api/data/itemoverview?type=Map&league=Standard |
+| Unique Jewels | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueJewel |
+| Unique Flasks | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueFlask |
+| Unique Weapons | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueWeapon |
+| Unique Armours | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueArmour |
+| Unique Accessories | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueAccessory |
+| Beasts | https://poe.ninja/api/data/itemoverview?league=Blight&type=Beast |
+
+There are 2 categories:
+- currencyoverview
+- itemoverview
+
+Currency partial example:
+
+```json
+"lines": [
+  {
+    "currencyTypeName": "Mirror of Kalandra",
+    "pay": {
+      "value": 0.0000198156,
+    },
+    "receive": {
+      "value": 52359.795918367345,
+    },
+    "chaosEquivalent": 51412.54,
+    "detailsId": "mirror-of-kalandra"
+  },
+]
+```
+
+- Human name (not unique for all types): `currencyTypeName`
+- Unique name: `detailsId`
+- Chaos price: `chaosEquivalent`
+- Exalted price: `-`
+
+Item partial example:
+
+```json
+"lines": [
+  {
+    "id": 22607,
+    "name": "Golden Oil",
+    "icon": "https://web.poecdn.com/image/Art/2DItems/Currency/Oils/GoldenOil.png?scale=1&w=1&h=1",
+    "chaosValue": 318.48,
+    "exaltedValue": 2.12,
+    "detailsId": "golden-oil"
+  },
+]
+```
+
+- Human name (not unique for all types): `name`
+- Unique name: `detailsId`
+- Chaos price: `chaosValue`
+- Exalted price: `exaltedValue`
+
+Sources:
 - https://www.reddit.com/r/pathofexiledev/comments/d9ubuv/poeninja_api/
 - https://github.com/klayveR/poe-ninja-api-manager
 - https://www.reddit.com/r/pathofexiledev/comments/6vxowg/list_of_poeninja_api_links/
 
+## Examples
+
 ### Maps
 
-https://poe.ninja/api/data/GetMapOverview?league=Standard
+https://poe.ninja/api/data/itemoverview?type=Map&league=Standard
 
 ```json
 "lines": [
