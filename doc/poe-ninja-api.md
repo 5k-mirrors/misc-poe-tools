@@ -1,5 +1,10 @@
 ## `poe.ninja` API response examples
 
+See also:
+- https://www.reddit.com/r/pathofexiledev/comments/d9ubuv/poeninja_api/
+- https://github.com/klayveR/poe-ninja-api-manager
+- https://www.reddit.com/r/pathofexiledev/comments/6vxowg/list_of_poeninja_api_links/
+
 ### Maps
 
 https://poe.ninja/api/data/GetMapOverview?league=Standard
