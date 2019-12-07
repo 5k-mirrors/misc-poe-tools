@@ -77,7 +77,7 @@ class App extends React.Component {
     )} chaos profit`;
 
     if (comparison.compare.length !== 0)
-      text += `, cost: ${this.costText(comparison.compare)}, pieces: ${
+      text += `, cost: ${this.costText(comparison.compare)} chaos, pieces: ${
         comparison.compare.length
       }`;
 
