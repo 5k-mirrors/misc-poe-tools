@@ -1,78 +1,37 @@
 import { fetchJSON } from "./http";
-import { itemsApi } from "./config";
-
-const meta = () => {
-  return {
-    currencies: {
-      category: "currency",
-      type: "Currency",
-      name_key: "currencyTypeName",
-      compare_key: "chaosEquivalent",
-    },
-    fragments: {
-      category: "currency",
-      type: "Fragment",
-      name_key: "currencyTypeName",
-      compare_key: "chaosEquivalent",
-    },
-    prophecies: {
-      category: "item",
-      type: "Prophecy",
-      name_key: "name",
-      compare_key: "chaosValue",
-    },
-    accessories: {
-      category: "item",
-      type: "UniqueAccessory",
-      name_key: "name",
-      compare_key: "chaosValue",
-    },
-    divination_cards: {
-      category: "item",
-      type: "DivinationCard",
-      name_key: "name",
-      compare_key: "chaosValue",
-    },
-    base_types: {
-      category: "item",
-      type: "BaseType",
-      name_key: "detailsId",
-      compare_key: "chaosValue",
-    },
-    maps: {
-      category: "item",
-      type: "Map",
-      name_key: "name",
-      compare_key: "chaosValue",
-    },
-  };
-};
+import { itemsApi, typeConfigByCategory, typeConfig } from "./poe-ninja";
 
 export const fetchItems = league => {
   const items = {};
   items[league] = {};
 
-  return Promise.all(
-    Object.entries(meta()).map(([type, details]) => {
-      const url = itemsApi(details.type, details.category, league);
-      console.log(`Fetching ${type} items for ${league} league from ${url}`);
-      return fetchJSON(url)
-        .then(itemsForLeague => {
-          console.log(`Fetched: ${itemsForLeague.lines.length} ${type} items`);
-          items[league][type] = itemsForLeague.lines;
-        })
-        .catch(error => {
-          console.error(`Couldn't fetch items: ${error}`);
-        });
+  const fetchPromises = Object.entries(typeConfigByCategory())
+    .map(([category, categoryItems]) => {
+      return Object.entries(categoryItems).map(([type, details]) => {
+        const url = itemsApi(category, details.type, league);
+        console.log(`Fetching ${type} items for ${league} league from ${url}`);
+        return fetchJSON(url)
+          .then(itemsForLeague => {
+            console.log(
+              `Fetched: ${itemsForLeague.lines.length} ${type} items`
+            );
+            items[league][type] = itemsForLeague.lines;
+          })
+          .catch(error => {
+            console.error(`Couldn't fetch items: ${error}`);
+          });
+      });
     })
-  ).then(() => {
+    .flat();
+
+  return Promise.all(fetchPromises).then(() => {
     return items;
   });
 };
 
 const find = (items, league, name) => {
   let foundItem;
-  for (const [type, details] of Object.entries(meta())) {
+  for (const [type, details] of Object.entries(typeConfig())) {
     for (const item of items[league][type]) {
       if (item[details.name_key] === name) {
         foundItem = item;
@@ -98,7 +57,7 @@ export const cost = (items, league, names) => {
   let value = 0;
 
   for (const item of foundItems) {
-    const compareKey = meta()[item.type].compare_key;
+    const compareKey = typeConfig()[item.type].compare_key;
     value += item[compareKey];
   }
 
@@ -122,12 +81,12 @@ export const comparePrice = (items, league, baseNames, compareNames) => {
   let value = 0;
 
   for (const baseItem of baseItems) {
-    const baseItemCompareKey = meta()[baseItem.type].compare_key;
+    const baseItemCompareKey = typeConfig()[baseItem.type].compare_key;
     value += baseItem[baseItemCompareKey];
   }
 
   for (const compareItem of compareItems) {
-    const compareItemCompareKey = meta()[compareItem.type].compare_key;
+    const compareItemCompareKey = typeConfig()[compareItem.type].compare_key;
     value -= compareItem[compareItemCompareKey];
   }
 

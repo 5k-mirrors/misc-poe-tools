@@ -1,15 +1,9 @@
-const proxy = url => {
+export const proxy = url => {
   return `https://c-hive-proxy.herokuapp.com/${url}`;
 };
 
 export const leaguesApi = () => {
   return proxy("http://api.pathofexile.com/leagues?type=main&compact=1");
-};
-
-export const itemsApi = (type, category, league) => {
-  return proxy(
-    `https://poe.ninja/api/data/${category}overview?league=${league}&type=${type}`
-  );
 };
 
 export const comparisons = () => {
