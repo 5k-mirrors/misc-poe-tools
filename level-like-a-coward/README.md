@@ -1,6 +1,6 @@
 # PoE - Level like a coward
 
-Sends system notifications when you need to change rooms or the map is finished. This lets you AFK in a rota.
+In a `The Coward's Trial` map this script sends system notifications when you need to change rooms or the map is finished. This lets you AFK in a rota.
 
 ### Usage:
 
