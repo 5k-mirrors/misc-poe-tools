@@ -81,7 +81,7 @@ export const comparisons = () => {
         name: "Kaom's Way",
         base: ["Kaom's Way"],
         compare: ["Kaom's Sign", "The King's Path"],
-        comment: "location: Kaom's Stronghold (Act 4)",
+        comment: "Kaom's Stronghold (Act 4)",
       },
     ],
     "Prophecy rewards": [
@@ -89,7 +89,7 @@ export const comparisons = () => {
         name: "Volkuur's Key",
         base: ["Volkuur's Key"],
         compare: ["The Unbreathing Queen V", "Cemetery Map"],
-        comment: "location: Cemetery Map",
+        comment: "Cemetery Map",
       },
     ],
     "Gilded Scarabs": [
