@@ -400,7 +400,7 @@ export const comparisons = () => {
         base: ["Winterweave"],
         compare: ["Bloodboil", "Cold Blooded Fury"],
         comment: "Beach Map"
-      }
+      },
     ],
     "Prophecy rewards": [
       {
