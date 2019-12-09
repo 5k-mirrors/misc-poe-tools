@@ -31,6 +31,16 @@ export const typeConfigByCategory = () => {
         name_key: "name",
         compare_key: "chaosValue",
       },
+      weapons: {
+        type: "UniqueWeapon",
+        name_key: "name",
+        compare_key: "chaosValue",
+      },
+      armours: {
+        type: "UniqueArmour",
+        name_key: "name",
+        compare_key: "chaosValue",
+      },
       divination_cards: {
         type: "DivinationCard",
         name_key: "name",
