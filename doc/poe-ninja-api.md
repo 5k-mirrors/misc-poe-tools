@@ -1,0 +1,437 @@
+# `poe.ninja` API
+
+| Category | API |
+| -------- | --- |
+| Currency | https://poe.ninja/api/data/currencyoverview?league=Blight&type=Currency |
+| Fragment | https://poe.ninja/api/data/currencyoverview?league=Blight&type=Fragment |
+| Oils | https://poe.ninja/api/data/itemoverview?league=Blight&type=Oil |
+| Incubators | https://poe.ninja/api/data/itemoverview?league=Blight&type=Incubator |
+| Scarabs | https://poe.ninja/api/data/itemoverview?league=Blight&type=Scarab |
+| Fossils | https://poe.ninja/api/data/itemoverview?league=Blight&type=Fossil |
+| Resonators | https://poe.ninja/api/data/itemoverview?league=Blight&type=Resonator |
+| Essence | https://poe.ninja/api/data/itemoverview?league=Blight&type=Essence |
+| Divination Cards | https://poe.ninja/api/data/itemoverview?league=Blight&type=DivinationCard |
+| Prophecies | https://poe.ninja/api/data/itemoverview?league=Blight&type=Prophecy |
+| Skill Gems | https://poe.ninja/api/data/itemoverview?league=Blight&type=SkillGem |
+| Base Types | https://poe.ninja/api/data/itemoverview?league=Blight&type=BaseType |
+| Helmet Enchants | https://poe.ninja/api/data/itemoverview?league=Blight&type=HelmetEnchant |
+| Unique Maps | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueMap |
+| Maps | https://poe.ninja/api/data/itemoverview?type=Map&league=Standard |
+| Unique Jewels | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueJewel |
+| Unique Flasks | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueFlask |
+| Unique Weapons | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueWeapon |
+| Unique Armours | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueArmour |
+| Unique Accessories | https://poe.ninja/api/data/itemoverview?league=Blight&type=UniqueAccessory |
+| Beasts | https://poe.ninja/api/data/itemoverview?league=Blight&type=Beast |
+
+There are 2 categories:
+- currencyoverview
+- itemoverview
+
+Currency partial example:
+
+```json
+"lines": [
+  {
+    "currencyTypeName": "Mirror of Kalandra",
+    "pay": {
+      "value": 0.0000198156,
+    },
+    "receive": {
+      "value": 52359.795918367345,
+    },
+    "chaosEquivalent": 51412.54,
+    "detailsId": "mirror-of-kalandra"
+  },
+]
+```
+
+- Human name (not unique for all types): `currencyTypeName`
+- Unique name: `detailsId`
+- Chaos price: `chaosEquivalent`
+- Exalted price: `-`
+
+Item partial example:
+
+```json
+"lines": [
+  {
+    "id": 22607,
+    "name": "Golden Oil",
+    "icon": "https://web.poecdn.com/image/Art/2DItems/Currency/Oils/GoldenOil.png?scale=1&w=1&h=1",
+    "chaosValue": 318.48,
+    "exaltedValue": 2.12,
+    "detailsId": "golden-oil"
+  },
+]
+```
+
+- Human name (not unique for all types): `name`
+- Unique name: `detailsId`
+- Chaos price: `chaosValue`
+- Exalted price: `exaltedValue`
+
+Sources:
+- https://www.reddit.com/r/pathofexiledev/comments/d9ubuv/poeninja_api/
+- https://github.com/klayveR/poe-ninja-api-manager
+- https://www.reddit.com/r/pathofexiledev/comments/6vxowg/list_of_poeninja_api_links/
+
+## Examples
+
+### Maps
+
+https://poe.ninja/api/data/itemoverview?type=Map&league=Standard
+
+```json
+"lines": [
+  {
+    "id": 2458,
+    "name": "Shrine Map",
+    "icon": "https://web.poecdn.com/image/Art/2DItems/Maps/Atlas2Maps/New/Shrine.png?scale=1&scaleIndex=0&w=1&h=1&mn=2&mt=13",
+    "mapTier": 13,
+    "levelRequired": 0,
+    "baseType": "Shrine Map",
+    "stackSize": 0,
+    "variant": "Atlas2",
+    "prophecyText": null,
+    "artFilename": null,
+    "links": 0,
+    "itemClass": 0,
+    "sparkline": {
+      "data": [],
+      "totalChange": 0
+    },
+    "lowConfidenceSparkline": {
+      "data": [
+        0,
+        0.04,
+        0.25,
+        0.24,
+        0.23,
+        0,
+        -0.15
+      ],
+      "totalChange": -0.15
+    },
+    "implicitModifiers": [],
+    "explicitModifiers": [],
+    "flavourText": "",
+    "corrupted": false,
+    "gemLevel": 0,
+    "gemQuality": 0,
+    "itemType": "Unknown",
+    "chaosValue": 51332.64,
+    "exaltedValue": 298.39,
+    "count": 1,
+    "detailsId": "shrine-map-atlas2"
+  },
+]
+```
+
+### Base types
+
+https://poe.ninja/api/data/GetBaseTypeOverview?league=Standard
+
+```json
+"lines": [
+  {
+    "id": 15361,
+    "name": "Stygian Vise",
+    "icon": "https://web.poecdn.com/image/Art/2DItems/Belts/AbyssBelt.png?scale=1&scaleIndex=0&w=2&h=1",
+    "mapTier": 0,
+    "levelRequired": 82,
+    "baseType": "Stygian Vise",
+    "stackSize": 0,
+    "variant": "Shaper",
+    "prophecyText": null,
+    "artFilename": null,
+    "links": 0,
+    "itemClass": 2,
+    "sparkline": {
+      "data": [],
+      "totalChange": 0
+    },
+    "lowConfidenceSparkline": {
+      "data": [
+        0,
+        36.76,
+        36.88,
+        37.06,
+        -26.37,
+        -26.71,
+        33.56
+      ],
+      "totalChange": 33.56
+    },
+    "implicitModifiers": [],
+    "explicitModifiers": [],
+    "flavourText": "",
+    "corrupted": false,
+    "gemLevel": 0,
+    "gemQuality": 0,
+    "itemType": "Belt",
+    "chaosValue": 68678.96,
+    "exaltedValue": 399.23,
+    "count": 3,
+    "detailsId": "stygian-vise-82-shaper"
+  },
+]
+```
+
+### Currencies
+
+https://poe.ninja/api/data/GetCurrencyOverview?league=Standard
+
+```json
+"lines": [
+  {
+    "currencyTypeName": "Mirror of Kalandra",
+    "pay": {
+      "id": 0,
+      "league_id": 1,
+      "pay_currency_id": 22,
+      "get_currency_id": 1,
+      "sample_time_utc": "2019-12-05T21:37:06.4323527Z",
+      "count": 45,
+      "value": 0.0000198156,
+      "data_point_count": 1,
+      "includes_secondary": true
+    },
+    "receive": {
+      "id": 0,
+      "league_id": 1,
+      "pay_currency_id": 1,
+      "get_currency_id": 22,
+      "sample_time_utc": "2019-12-05T21:37:06.4323527Z",
+      "count": 20,
+      "value": 52359.795918367345,
+      "data_point_count": 1,
+      "includes_secondary": true
+    },
+    "paySparkLine": {
+      "data": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.93
+      ],
+      "totalChange": 0.93
+    },
+    "receiveSparkLine": {
+      "data": [
+        0,
+        -0.51,
+        -0.18,
+        -0.26,
+        -0.51,
+        -0.51,
+        -0.54
+      ],
+      "totalChange": -0.54
+    },
+    "chaosEquivalent": 51412.54,
+    "lowConfidencePaySparkLine": {
+      "data": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.93
+      ],
+      "totalChange": 0.93
+    },
+    "lowConfidenceReceiveSparkLine": {
+      "data": [
+        0,
+        -0.51,
+        -0.18,
+        -0.26,
+        -0.51,
+        -0.51,
+        -0.54
+      ],
+      "totalChange": -0.54
+    },
+    "detailsId": "mirror-of-kalandra"
+  },
+]
+```
+
+### Divination cards
+
+https://poe.ninja/api/data/GetDivinationCardsOverview?league=Standard
+
+```json
+"lines": [
+  {
+    "id": 636,
+    "name": "House of Mirrors",
+    "icon": "https://web.poecdn.com/image/Art/2DItems/Divination/InventoryIcon.png?scale=1&scaleIndex=0&w=1&h=1",
+    "mapTier": 0,
+    "levelRequired": 0,
+    "baseType": null,
+    "stackSize": 9,
+    "variant": null,
+    "prophecyText": null,
+    "artFilename": "HouseOfMirrors",
+    "links": 0,
+    "itemClass": 6,
+    "sparkline": {
+      "data": [
+        0,
+        0.24,
+        -0.46,
+        -0.41,
+        -0.17,
+        0.05,
+        -0.04
+      ],
+      "totalChange": -0.04
+    },
+    "lowConfidenceSparkline": {
+      "data": [
+        0,
+        0.24,
+        -0.46,
+        -0.41,
+        -0.17,
+        0.05,
+        -0.04
+      ],
+      "totalChange": -0.04
+    },
+    "implicitModifiers": [],
+    "explicitModifiers": [
+      {
+        "text": "<currencyitem>{Mirror of Kalandra}",
+        "optional": false
+      }
+    ],
+    "flavourText": "What do you see in the mirror?",
+    "corrupted": false,
+    "gemLevel": 0,
+    "gemQuality": 0,
+    "itemType": "Unknown",
+    "chaosValue": 5705.78,
+    "exaltedValue": 33.17,
+    "count": 13,
+    "detailsId": "house-of-mirrors"
+  },
+]
+```
+
+### Prophecies
+
+https://poe.ninja/api/data/GetProphecyOverview?league=Standard
+
+```js
+lines: [
+  {
+    id: 1540,
+    name: "The King's Path",
+    icon:
+      "https://web.poecdn.com/image/Art/2DItems/Currency/ProphecyOrbRed.png?scale=1&scaleIndex=0&w=1&h=1",
+    chaosValue: 418.35,
+    exaltedValue: 5.412,
+    lowConfidenceSparkline: {
+      totalChange: -4.39
+    }
+  }
+]
+```
+
+### Fragments
+
+https://poe.ninja/api/data/getFragmentoverview?league=Standard
+
+```json
+"lines": [
+  {
+    "currencyTypeName": "Chayula's Pure Breachstone",
+    "pay": {
+      "id": 0,
+      "league_id": 70,
+      "pay_currency_id": 97,
+      "get_currency_id": 1,
+      "sample_time_utc": "2019-12-05T21:19:17.3752357Z",
+      "count": 2,
+      "value": 0.0027758492684,
+      "data_point_count": 1,
+      "includes_secondary": true
+    },
+  }
+]
+```
+
+### Unique Accessories
+
+https://poe.ninja/api/data/GetUniqueAccessoryOverview?league=Standard
+
+```json
+"lines": [
+  {
+    "id": 1389,
+    "name": "Talisman of the Victor",
+    "icon": "https://web.poecdn.com/image/Art/2DItems/Amulets/TalismanoftheVictor.png?scale=1&scaleIndex=0&w=1&h=1",
+    "mapTier": 0,
+    "levelRequired": 12,
+    "baseType": "Jet Amulet",
+    "stackSize": 0,
+    "variant": null,
+    "prophecyText": null,
+    "artFilename": null,
+    "links": 0,
+    "itemClass": 3,
+    "sparkline": {
+      "data": [],
+      "totalChange": 0
+    },
+    "lowConfidenceSparkline": {
+      "data": [
+        null,
+        0,
+        -0.25,
+        -0.2,
+        -0.08,
+        -0.08,
+        -0.33
+      ],
+      "totalChange": -0.33
+    },
+    "implicitModifiers": [
+      {
+        "text": "+(8-12)% to all Elemental Resistances",
+        "optional": false
+      }
+    ],
+    "explicitModifiers": [
+      {
+        "text": "(3-6)% increased Movement Speed",
+        "optional": false
+      },
+      {
+        "text": "(5-10)% increased Defences",
+        "optional": true
+      },
+      {
+        "text": "(5-10)% increased Global Defences",
+        "optional": false
+      }
+    ],
+    "flavourText": "A glimpse of victory\r|is all you need to win.",
+    "corrupted": false,
+    "gemLevel": 0,
+    "gemQuality": 0,
+    "itemType": "Amulet",
+    "chaosValue": 68812,
+    "exaltedValue": 400,
+    "count": 1,
+    "detailsId": "talisman-of-the-victor-jet-amulet"
+  },
+]
+```

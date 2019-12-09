@@ -1,7 +1,7 @@
 import React from "react";
 import { comparisons } from "../functions/config";
 import { metaLeagues, fetchLeagues } from "../functions/leagues";
-import { fetchItems, comparePrice } from "../functions/items";
+import { fetchItems, comparePrice, cost } from "../functions/items";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <h2>League:</h2>
+        <h1>PoE - What to flip?</h1>
         <select
           name="league"
           value={selectedMetaLeague}
@@ -42,11 +42,10 @@ class App extends React.Component {
           ))}
         </select>
 
-        <h2>Differences:</h2>
         <ol>
           {Object.keys(comparisonsByGroup).map(group => (
             <div key={group}>
-              <h3>{group}</h3>
+              <h2>{group}</h2>
               {comparisonsByGroup[group].map((comparison, i) => (
                 <li key={i}>
                   <label>{this.comparisonText(comparison)}</label>
@@ -60,10 +59,29 @@ class App extends React.Component {
   }
 
   comparisonText(comparison) {
-    let text = `${comparison.name}: ${this.compare(
+    let text = `${comparison.name}: `;
+
+    if (
+      !this.state.selectedLeague ||
+      !this.state.items ||
+      !this.state.items[this.state.selectedLeague]
+    ) {
+      text += "?";
+      return text;
+    }
+
+    text += `${this.compareText(
       comparison.base,
       comparison.compare
-    )} chaos`;
+    )} chaos profit`;
+
+    const pieces = comparison.compare.length;
+
+    if (pieces !== 0)
+      text += `, cost: ${this.costText(
+        comparison.compare
+      )} chaos, pieces: ${pieces}`;
+
     if (comparison.comment) {
       text += ` (${comparison.comment})`;
     }
@@ -88,15 +106,16 @@ class App extends React.Component {
     );
   }
 
-  compare(base, compare) {
-    if (
-      !this.state.selectedLeague ||
-      !this.state.items ||
-      !this.state.items[this.state.selectedLeague]
-    ) {
-      return "?";
-    }
+  costText(names) {
+    const costText = cost(this.state.items, this.state.selectedLeague, names);
 
+    if (!costText) {
+      return "N/A";
+    }
+    return costText;
+  }
+
+  compareText(base, compare) {
     const comparison = comparePrice(
       this.state.items,
       this.state.selectedLeague,
