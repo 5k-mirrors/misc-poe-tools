@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env GOOGLE_APPLICATION_CREDENTIALS=credentials.json node index.js",
+    "restart": "rm output/*.mp3; cross-env GOOGLE_APPLICATION_CREDENTIALS=credentials.json node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
