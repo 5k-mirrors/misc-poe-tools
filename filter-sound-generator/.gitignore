@@ -1,5 +1,5 @@
 node_modules
-output
+output/*.mp3
 
 *.json
 !package*.json
