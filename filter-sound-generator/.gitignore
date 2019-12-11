@@ -1,0 +1,10 @@
+node_modules
+output
+
+*.json
+!package*.json
+
+synthesize-text.txt
+credentials.json
+
+*.filter
