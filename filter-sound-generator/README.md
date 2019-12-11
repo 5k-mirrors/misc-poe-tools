@@ -1,8 +1,8 @@
 # Filter sound generator
 
-Create google project, enable TTS, get key.
+Create google project, enable TTS, get key, save it in the folder as `credentials.json`.
 
-`export GOOGLE_APPLICATION_CREDENTIALS=credentials.json`
+`npm run start`
 
 To the filter add something like
 

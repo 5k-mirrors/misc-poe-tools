@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "cross-env GOOGLE_APPLICATION_CREDENTIALS=credentials.json node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@google-cloud/text-to-speech": "^2.1.0"
+    "@google-cloud/text-to-speech": "^2.1.0",
+    "cross-env": "^6.0.3"
   }
 }

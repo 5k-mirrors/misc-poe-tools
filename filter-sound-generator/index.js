@@ -28,5 +28,7 @@ texts.forEach((text) => {
     return writeFile(outputFile, response.audioContent, 'binary');
   }).then(() => {
     console.log(`Audio content written to file: ${outputFile}`);
+  }).catch((e) => {
+    console.error(e);
   });
 });
