@@ -69,39 +69,51 @@ const customFilters = [
   },
   {
     name: 'bbb',
-    filterOptions: 'LinkedSockets 3\nSocketGroup BBB\nItemLevel <= 14',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BBB\nItemLevel <= 14\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
   },
   {
     name: 'bbg',
-    filterOptions: 'LinkedSockets 3\nSocketGroup BBG\nItemLevel <= 14',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BBG\nItemLevel <= 14\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
   },
   {
     name: 'bgg',
-    filterOptions: 'LinkedSockets 3\nSocketGroup BGG\nItemLevel <= 14',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BGG\nItemLevel <= 14\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
   },
   {
     name: '4 link b',
-    filterOptions: 'LinkedSockets 4\nSocketGroup BBBB',
+    filterOptions: 'LinkedSockets 4\nSocketGroup BBBB\nClass "Boots" "Gloves" "Helmets" "Body Armour"',
   },
   {
     name: '4 link g',
-    filterOptions: 'LinkedSockets 4\nSocketGroup GGGG',
+    filterOptions: 'LinkedSockets 4\nSocketGroup GGGG\nClass "Boots" "Gloves" "Helmets" "Body Armour"',
   },
   {
     name: '4 link bg',
-    filterOptions: 'LinkedSockets 4\nSocketGroup BBGG',
+    filterOptions: 'LinkedSockets 4\nSocketGroup BBGG\nClass "Boots" "Gloves" "Helmets" "Body Armour"',
   },
   {
     name: '4 link bg',
-    filterOptions: 'LinkedSockets 4\nSocketGroup BBBG',
+    filterOptions: 'LinkedSockets 4\nSocketGroup BBBG\nClass "Boots" "Gloves" "Helmets" "Body Armour"',
   },
   {
     name: '4 link bg',
-    filterOptions: 'LinkedSockets 4\nSocketGroup BGGG',
+    filterOptions: 'LinkedSockets 4\nSocketGroup BGGG\nClass "Boots" "Gloves" "Helmets" "Body Armour"',
   },
   {
     name: 'quicksilver',
     filterOptions: 'BaseType "Quicksilver Flask"',
+  },
+  {
+    name: '5 link bbb',
+    filterOptions: 'LinkedSockets 5\nSocketGroup BBB\nClass "Body Armour"',
+  },
+  {
+    name: '5 link ggg',
+    filterOptions: 'LinkedSockets 5\nSocketGroup GGG\nClass "Body Armour"',
+  },
+  {
+    name: '6 link',
+    filterOptions: 'LinkedSockets 6\nClass "Body Armour"',
   },
 ];
 
