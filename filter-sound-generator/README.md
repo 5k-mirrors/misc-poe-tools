@@ -27,3 +27,8 @@ PlayEffect Red
 MinimapIcon 0 Red Star
 CustomAlertSound "bbb.mp3"
 ```
+
+## TODO
+
+- Add chrome stuff for early on
+- Limit colors to 1h caster stuff and non-body armour armours (4-links can be armours)

@@ -56,20 +56,28 @@ const customFilters = [
     filterOptions: 'BaseType "Orb of Chance"',
   },
   {
-    name: 'alch',
+    name: 'chrome',
+    filterOptions: 'BaseType "Chromatic Orb"',
+  },
+  {
+    name: 'chrome',
+    filterOptions: 'SocketGroup RGB',
+  },
+  {
+    name: 'alchemy',
     filterOptions: 'BaseType "Orb of Alchemy"',
   },
   {
     name: 'bbb',
-    filterOptions: 'SocketGroup BBB\nItemLevel <= 14\n',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BBB\nItemLevel <= 14',
   },
   {
     name: 'bbg',
-    filterOptions: 'SocketGroup BBG\nItemLevel <= 14\n',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BBG\nItemLevel <= 14',
   },
   {
     name: 'bgg',
-    filterOptions: 'SocketGroup BGG\nItemLevel <= 14',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BGG\nItemLevel <= 14',
   },
   {
     name: '4 link b',
