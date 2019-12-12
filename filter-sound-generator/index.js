@@ -69,15 +69,15 @@ const customFilters = [
   },
   {
     name: 'bbb',
-    filterOptions: 'LinkedSockets 3\nSocketGroup BBB\nItemLevel <= 14\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BBB\nItemLevel <= 15\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
   },
   {
     name: 'bbg',
-    filterOptions: 'LinkedSockets 3\nSocketGroup BBG\nItemLevel <= 14\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BBG\nItemLevel <= 15\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
   },
   {
     name: 'bgg',
-    filterOptions: 'LinkedSockets 3\nSocketGroup BGG\nItemLevel <= 14\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
+    filterOptions: 'LinkedSockets 3\nSocketGroup BGG\nItemLevel <= 15\nClass "Boots" "Gloves" "Helmets" "Sceptres" "Wands" "Daggers" "Rune Dagger"',
   },
   {
     name: '4 link b',
