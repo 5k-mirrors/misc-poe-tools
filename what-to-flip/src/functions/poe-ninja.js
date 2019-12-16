@@ -61,6 +61,16 @@ export const typeConfigByCategory = () => {
         name_key: "name",
         compare_key: "chaosValue",
       },
+      jewels: {
+        type: "UniqueJewel",
+        name_key: "name",
+        compare_key: "chaosValue",
+      },
+      flasks: {
+        type: "UniqueFlask",
+        name_key: "name",
+        compare_key: "chaosValue",
+      },
     },
   };
 };
