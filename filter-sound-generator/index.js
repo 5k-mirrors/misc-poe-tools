@@ -61,7 +61,7 @@ const customFilters = [
   },
   {
     name: 'chrome',
-    filterOptions: 'SocketGroup RGB',
+    filterOptions: 'LinkedSockets <= 5\nSocketGroup RGB',
   },
   {
     name: 'alchemy',
