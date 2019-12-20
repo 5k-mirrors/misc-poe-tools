@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import { leaguesApi } from "../functions/config";
 import { fetchJSON } from "../functions/http";
 
-export const useLeagues = () => {
+export const useSelectedLeague = () => {
   const [leagues, setLeagues] = useState({});
-
   useEffect(() => {
     fetchLeagues().then(leagues => {
       console.log(`Leagues: ${JSON.stringify(leagues)}`);
@@ -13,11 +12,16 @@ export const useLeagues = () => {
     });
   }, []);
 
-  return leagues;
-};
+  const [selectedMetaLeague, setSelectedMetaLeague] = useState("Temp SC");
 
-export const metaLeagues = () => {
-  return ["Temp SC", "Temp HC", "Standard", "Hardcore"];
+  const [selectedLeague, setSelectedLeague] = useState();
+  useEffect(() => {
+    setSelectedLeague(leagues[selectedMetaLeague]);
+  }, [leagues, selectedMetaLeague]);
+
+  const metaLeagues = ["Temp SC", "Temp HC", "Standard", "Hardcore"];
+
+  return [metaLeagues, selectedMetaLeague, selectedLeague, setSelectedMetaLeague];
 };
 
 const mapToMetaLeagues = leagues => {

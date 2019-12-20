@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { comparisons } from "../functions/config";
-import { metaLeagues, useLeagues } from "./leagues";
+import { useSelectedLeague } from "./leagues";
 import { fetchItems, comparePrice, cost } from "../functions/items";
 
 const useSelectedLeagueItems = (selectedLeague) => {
@@ -19,15 +19,9 @@ const useSelectedLeagueItems = (selectedLeague) => {
 };
 
 export default () => {
-  const [selectedMetaLeague, setSelectedMetaLeague] = useState("Temp SC");
-  const [selectedLeague, setSelectedLeague] = useState();
-  const leagues = useLeagues();
+  const [metaLeagues, selectedMetaLeague, selectedLeague, setSelectedMetaLeague] = useSelectedLeague();
   const items = useSelectedLeagueItems(selectedLeague);
   const comparisonsByGroup = comparisons();
-
-  useEffect(() => {
-    setSelectedLeague(leagues[selectedMetaLeague]);
-  }, [leagues, selectedMetaLeague]);
 
   const comparisonText = (comparison) => {
     let text = `${comparison.name}: `;
@@ -95,7 +89,7 @@ export default () => {
         value={selectedMetaLeague}
         onChange={event => setSelectedMetaLeague(event.target.value)}
       >
-        {metaLeagues().map(league => (
+        {metaLeagues.map(league => (
           <option key={league} value={league}>
             {league}
           </option>
