@@ -1,5 +1,20 @@
-import { leaguesApi } from "./config";
-import { fetchJSON } from "./http";
+import { useState, useEffect } from "react";
+
+import { leaguesApi } from "../functions/config";
+import { fetchJSON } from "../functions/http";
+
+export const useLeagues = () => {
+  const [leagues, setLeagues] = useState({});
+
+  useEffect(() => {
+    fetchLeagues().then(leagues => {
+      console.log(`Leagues: ${JSON.stringify(leagues)}`);
+      setLeagues(leagues);
+    });
+  }, []);
+
+  return leagues;
+};
 
 export const metaLeagues = () => {
   return ["Temp SC", "Temp HC", "Standard", "Hardcore"];
@@ -37,7 +52,7 @@ const mapToMetaLeagues = leagues => {
   };
 };
 
-export const fetchLeagues = () => {
+const fetchLeagues = () => {
   return fetchJSON(leaguesApi())
     .then(leagues => {
       return mapToMetaLeagues(leagues);

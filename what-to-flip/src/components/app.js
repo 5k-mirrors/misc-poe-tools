@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { comparisons } from "../functions/config";
-import { metaLeagues, fetchLeagues } from "../functions/leagues";
+import { metaLeagues, useLeagues } from "./leagues";
 import { fetchItems, comparePrice, cost } from "../functions/items";
 
-export default () => {
-  const [selectedMetaLeague, setSelectedMetaLeague] = useState("Temp SC");
-  const [comparisonsByGroup, setComparisonsByGroup] = useState(comparisons());
-  const [leagues, setLeagues] = useState({});
-  const [selectedLeague, setSelectedLeague] = useState();
+const useSelectedLeagueItems = (selectedLeague) => {
   const [items, setItems] = useState({});
-
-  useEffect(() => {
-    fetchLeagues().then(leagues => {
-      console.log(`Leagues: ${JSON.stringify(leagues)}`);
-      setLeagues(leagues);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (leagues) {
-      setSelectedLeague(leagues[selectedMetaLeague]);
-    };
-  }, [leagues]);
 
   useEffect(() => {
     if (selectedLeague) {
       console.log(`${selectedLeague} league selected, updating items...`);
-      updateItems(selectedLeague, setItems);
+      fetchItems(selectedLeague).then(items => {
+        setItems(items);
+      });
     };
   }, [selectedLeague]);
+
+  return items;
+};
+
+export default () => {
+  const [selectedMetaLeague, setSelectedMetaLeague] = useState("Temp SC");
+  const [comparisonsByGroup, setComparisonsByGroup] = useState(comparisons());
+  const [selectedLeague, setSelectedLeague] = useState();
+  const leagues = useLeagues();
+  const items = useSelectedLeagueItems(selectedLeague);
+
+  useEffect(() => {
+    setSelectedLeague(leagues[selectedMetaLeague]);
+  }, [leagues]);
 
   return (
     <div>
@@ -52,7 +51,6 @@ export default () => {
             {comparisonsByGroup[group].map((comparison, i) => (
               <li key={i}>
                 <label>
-                  hi
                   {/* {comparisonText(comparison)} */}
                   </label>
               </li>
@@ -95,11 +93,11 @@ const comparisonText = (comparison) => {
   return text;
 };
 
-const updateItems = (selectedLeague, setItems) => {
-  fetchItems(selectedLeague).then(items => {
-    setItems(items);
-  });
-};
+// const updateItems = (selectedLeague, setItems) => {
+//   fetchItems(selectedLeague).then(items => {
+//     setItems(items);
+//   });
+// };
 
 const leagueSelected = (event) => {
   // const selectedLeague = this.state.leagues[event.target.value];
