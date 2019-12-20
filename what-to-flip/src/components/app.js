@@ -29,6 +29,64 @@ export default () => {
     setSelectedLeague(leagues[selectedMetaLeague]);
   }, [leagues, selectedMetaLeague]);
 
+  const comparisonText = (comparison) => {
+    let text = `${comparison.name}: `;
+
+    if (
+      !selectedLeague ||
+      !items ||
+      !items[selectedLeague]
+    ) {
+      text += "?";
+      return text;
+    }
+
+    text += `${compareText(
+      comparison.base,
+      comparison.compare,
+      items,
+      selectedLeague,
+    )} chaos profit`;
+
+    const pieces = comparison.compare.length;
+
+    if (pieces !== 0)
+      text += `, cost: ${costText(
+        comparison.compare,
+        items,
+        selectedLeague,
+      )} chaos, pieces: ${pieces}`;
+
+    if (comparison.comment) {
+      text += ` (${comparison.comment})`;
+    }
+
+    return text;
+  };
+
+  const costText  = (names) => {
+    const costText = cost(items, selectedLeague, names);
+
+    if (!costText) {
+      return "N/A";
+    }
+    return costText;
+  }
+
+  const compareText = (base, compare) => {
+    const comparison = comparePrice(
+      items,
+      selectedLeague,
+      base,
+      compare
+    );
+
+    if (!comparison) {
+      return "N/A";
+    }
+    return comparison;
+  }
+
   return (
     <div>
       <h1>PoE - What to flip?</h1>
@@ -61,61 +119,3 @@ export default () => {
     </div>
   );
 };
-
-const comparisonText = (comparison, selectedLeague, items) => {
-  let text = `${comparison.name}: `;
-
-  if (
-    !selectedLeague ||
-    !items ||
-    !items[selectedLeague]
-  ) {
-    text += "?";
-    return text;
-  }
-
-  text += `${compareText(
-    comparison.base,
-    comparison.compare,
-    items,
-    selectedLeague,
-  )} chaos profit`;
-
-  const pieces = comparison.compare.length;
-
-  if (pieces !== 0)
-    text += `, cost: ${costText(
-      comparison.compare,
-      items,
-      selectedLeague,
-    )} chaos, pieces: ${pieces}`;
-
-  if (comparison.comment) {
-    text += ` (${comparison.comment})`;
-  }
-
-  return text;
-};
-
-const costText  = (names, items, selectedLeague) => {
-  const costText = cost(items, selectedLeague, names);
-
-  if (!costText) {
-    return "N/A";
-  }
-  return costText;
-}
-
-const compareText = (base, compare, items, selectedLeague) => {
-  const comparison = comparePrice(
-    items,
-    selectedLeague,
-    base,
-    compare
-  );
-
-  if (!comparison) {
-    return "N/A";
-  }
-  return comparison;
-}
