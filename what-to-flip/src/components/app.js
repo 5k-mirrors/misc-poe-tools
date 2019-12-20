@@ -23,14 +23,14 @@ export default () => {
   const items = useSelectedLeagueItems(selectedLeague);
   const comparisonsByGroup = comparisons();
 
+  const dataAvailable = () => {
+    return selectedLeague && items && items[selectedLeague];
+  }
+
   const comparisonText = (comparison) => {
     let text = `${comparison.name}: `;
 
-    if (
-      !selectedLeague ||
-      !items ||
-      !items[selectedLeague]
-    ) {
+    if (!dataAvailable()) {
       text += "?";
       return text;
     }
@@ -38,8 +38,6 @@ export default () => {
     text += `${compareText(
       comparison.base,
       comparison.compare,
-      items,
-      selectedLeague,
     )} chaos profit`;
 
     const pieces = comparison.compare.length;
@@ -47,8 +45,6 @@ export default () => {
     if (pieces !== 0)
       text += `, cost: ${costText(
         comparison.compare,
-        items,
-        selectedLeague,
       )} chaos, pieces: ${pieces}`;
 
     if (comparison.comment) {
