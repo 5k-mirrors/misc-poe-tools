@@ -13,13 +13,22 @@ export default () => {
   useEffect(() => {
     fetchLeagues().then(leagues => {
       console.log(`Leagues: ${JSON.stringify(leagues)}`);
-      setLeagues(leagues, () => {
-        setSelectedLeague(leagues[selectedMetaLeague], () => {
-          updateItems(selectedLeague, setItems);
-        });
-      });
+      setLeagues(leagues);
     });
-  });
+  }, []);
+
+  useEffect(() => {
+    if (leagues) {
+      setSelectedLeague(leagues[selectedMetaLeague]);
+    };
+  }, [leagues]);
+
+  useEffect(() => {
+    if (selectedLeague) {
+      console.log(`${selectedLeague} league selected, updating items...`);
+      updateItems(selectedLeague, setItems);
+    };
+  }, [selectedLeague]);
 
   return (
     <div>
