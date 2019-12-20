@@ -20,10 +20,10 @@ const useSelectedLeagueItems = (selectedLeague) => {
 
 export default () => {
   const [selectedMetaLeague, setSelectedMetaLeague] = useState("Temp SC");
-  const [comparisonsByGroup, setComparisonsByGroup] = useState(comparisons());
   const [selectedLeague, setSelectedLeague] = useState();
   const leagues = useLeagues();
   const items = useSelectedLeagueItems(selectedLeague);
+  const comparisonsByGroup = comparisons();
 
   useEffect(() => {
     setSelectedLeague(leagues[selectedMetaLeague]);
