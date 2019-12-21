@@ -3,31 +3,54 @@ import { comparisons } from "../functions/config";
 import { useSelectedLeague } from "./leagues";
 import { fetchItems, comparePrice, cost } from "../functions/items";
 
-const useSelectedLeagueItems = (selectedLeague) => {
+const useSelectedLeagueItems = selectedLeague => {
   const [items, setItems] = useState({});
 
   useEffect(() => {
     if (selectedLeague) {
       console.log(`${selectedLeague} league selected, updating items...`);
-      fetchItems(selectedLeague).then(items => {
-        setItems(items);
+      fetchItems(selectedLeague).then(fetchedItems => {
+        setItems(fetchedItems);
       });
-    };
+    }
   }, [selectedLeague]);
 
   return items;
 };
 
-export default () => {
-  const [metaLeagues, selectedMetaLeague, selectedLeague, setSelectedMetaLeague] = useSelectedLeague();
+const App = () => {
+  const [
+    metaLeagues,
+    selectedMetaLeague,
+    selectedLeague,
+    setSelectedMetaLeague,
+  ] = useSelectedLeague();
   const items = useSelectedLeagueItems(selectedLeague);
   const comparisonsByGroup = comparisons();
 
   const dataAvailable = () => {
     return selectedLeague && items && items[selectedLeague];
-  }
+  };
 
-  const comparisonText = (comparison) => {
+  const compareText = (base, compare) => {
+    const comparison = comparePrice(items, selectedLeague, base, compare);
+
+    if (!comparison) {
+      return "N/A";
+    }
+    return comparison;
+  };
+
+  const costText = names => {
+    const text = cost(items, selectedLeague, names);
+
+    if (!text) {
+      return "N/A";
+    }
+    return text;
+  };
+
+  const comparisonText = comparison => {
     let text = `${comparison.name}: `;
 
     if (!dataAvailable()) {
@@ -35,16 +58,13 @@ export default () => {
       return text;
     }
 
-    text += `${compareText(
-      comparison.base,
-      comparison.compare,
-    )} chaos profit`;
+    text += `${compareText(comparison.base, comparison.compare)} chaos profit`;
 
     const pieces = comparison.compare.length;
 
     if (pieces !== 0)
       text += `, cost: ${costText(
-        comparison.compare,
+        comparison.compare
       )} chaos, pieces: ${pieces}`;
 
     if (comparison.comment) {
@@ -53,29 +73,6 @@ export default () => {
 
     return text;
   };
-
-  const costText  = (names) => {
-    const costText = cost(items, selectedLeague, names);
-
-    if (!costText) {
-      return "N/A";
-    }
-    return costText;
-  }
-
-  const compareText = (base, compare) => {
-    const comparison = comparePrice(
-      items,
-      selectedLeague,
-      base,
-      compare
-    );
-
-    if (!comparison) {
-      return "N/A";
-    }
-    return comparison;
-  }
 
   return (
     <div>
@@ -100,7 +97,7 @@ export default () => {
               <li key={i}>
                 <label>
                   {comparisonText(comparison, selectedLeague, items)}
-                  </label>
+                </label>
               </li>
             ))}
           </div>
@@ -109,3 +106,5 @@ export default () => {
     </div>
   );
 };
+
+export default App;

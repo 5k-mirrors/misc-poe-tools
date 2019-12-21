@@ -3,27 +3,6 @@ import { useState, useEffect } from "react";
 import { leaguesApi } from "../functions/config";
 import { fetchJSON } from "../functions/http";
 
-export const useSelectedLeague = () => {
-  const [leagues, setLeagues] = useState({});
-  useEffect(() => {
-    fetchLeagues().then(leagues => {
-      console.log(`Leagues: ${JSON.stringify(leagues)}`);
-      setLeagues(leagues);
-    });
-  }, []);
-
-  const [selectedMetaLeague, setSelectedMetaLeague] = useState("Temp SC");
-
-  const [selectedLeague, setSelectedLeague] = useState();
-  useEffect(() => {
-    setSelectedLeague(leagues[selectedMetaLeague]);
-  }, [leagues, selectedMetaLeague]);
-
-  const metaLeagues = ["Temp SC", "Temp HC", "Standard", "Hardcore"];
-
-  return [metaLeagues, selectedMetaLeague, selectedLeague, setSelectedMetaLeague];
-};
-
 const mapToMetaLeagues = leagues => {
   const tempLeagues = leagues.filter(leagueHash => {
     const leagueName = leagueHash.id;
@@ -64,4 +43,30 @@ const fetchLeagues = () => {
     .catch(error => {
       console.error(`Couldn't fetch leagues: ${error}`);
     });
+};
+
+export const useSelectedLeague = () => {
+  const [leagues, setLeagues] = useState({});
+  useEffect(() => {
+    fetchLeagues().then(fetchedLeagues => {
+      console.log(`Leagues: ${JSON.stringify(fetchedLeagues)}`);
+      setLeagues(fetchedLeagues);
+    });
+  }, []);
+
+  const [selectedMetaLeague, setSelectedMetaLeague] = useState("Temp SC");
+
+  const [selectedLeague, setSelectedLeague] = useState();
+  useEffect(() => {
+    setSelectedLeague(leagues[selectedMetaLeague]);
+  }, [leagues, selectedMetaLeague]);
+
+  const metaLeagues = ["Temp SC", "Temp HC", "Standard", "Hardcore"];
+
+  return [
+    metaLeagues,
+    selectedMetaLeague,
+    selectedLeague,
+    setSelectedMetaLeague,
+  ];
 };
