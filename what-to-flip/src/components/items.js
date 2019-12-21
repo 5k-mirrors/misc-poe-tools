@@ -1,7 +1,12 @@
-import { fetchJSON } from "./http";
-import { itemsApi, typeConfigByCategory, typeConfig } from "./poe-ninja";
+import { useState, useEffect } from "react";
+import { fetchJSON } from "../functions/http";
+import {
+  itemsApi,
+  typeConfigByCategory,
+  typeConfig,
+} from "../functions/poe-ninja";
 
-export const fetchItems = league => {
+const fetchItems = league => {
   const items = {};
   items[league] = {};
 
@@ -45,6 +50,21 @@ const find = (items, league, name) => {
   }
 
   return foundItem;
+};
+
+export const useSelectedLeagueItems = selectedLeague => {
+  const [items, setItems] = useState({});
+
+  useEffect(() => {
+    if (selectedLeague) {
+      console.log(`${selectedLeague} league selected, updating items...`);
+      fetchItems(selectedLeague).then(fetchedItems => {
+        setItems(fetchedItems);
+      });
+    }
+  }, [selectedLeague]);
+
+  return items;
 };
 
 export const cost = (items, league, names) => {

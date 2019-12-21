@@ -1,22 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { comparisons } from "../functions/config";
 import { useSelectedLeague } from "./leagues";
-import { fetchItems, comparePrice, cost } from "../functions/items";
-
-const useSelectedLeagueItems = selectedLeague => {
-  const [items, setItems] = useState({});
-
-  useEffect(() => {
-    if (selectedLeague) {
-      console.log(`${selectedLeague} league selected, updating items...`);
-      fetchItems(selectedLeague).then(fetchedItems => {
-        setItems(fetchedItems);
-      });
-    }
-  }, [selectedLeague]);
-
-  return items;
-};
+import { useSelectedLeagueItems, comparePrice, cost } from "./items";
 
 const App = () => {
   const [
