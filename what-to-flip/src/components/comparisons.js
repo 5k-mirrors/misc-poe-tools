@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { comparisons } from "../functions/config";
 import { useSelectedLeagueItems, comparePrice, cost } from "./items";
 
@@ -66,4 +67,8 @@ export const Comparisons = ({ selectedLeague }) => {
       ))}
     </ol>
   );
+};
+
+Comparisons.propTypes = {
+  selectedLeague: PropTypes.string,
 };
