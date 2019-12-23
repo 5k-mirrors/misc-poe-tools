@@ -63,10 +63,10 @@ export const useSelectedLeague = () => {
 
   const metaLeagues = ["Temp SC", "Temp HC", "Standard", "Hardcore"];
 
-  return [
+  return {
     metaLeagues,
     selectedMetaLeague,
     selectedLeague,
     setSelectedMetaLeague,
-  ];
+  };
 };

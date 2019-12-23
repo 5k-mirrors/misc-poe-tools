@@ -4,12 +4,12 @@ import { ItemsProvider } from "../contexts/itemsContext";
 import { Comparisons } from "./comparisons";
 
 const App = () => {
-  const [
+  const {
     metaLeagues,
     selectedMetaLeague,
     selectedLeague,
     setSelectedMetaLeague,
-  ] = useSelectedLeague();
+  } = useSelectedLeague();
 
   return (
     <div>
