@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { fetchJSON } from "../functions/http";
 import {
   itemsApi,
   typeConfigByCategory,
   typeConfig,
 } from "../functions/poe-ninja";
+import { useItems } from "../contexts/itemsContext";
 
 const fetchItems = league => {
   const items = {};
@@ -53,7 +54,7 @@ const find = (items, league, name) => {
 };
 
 export const useSelectedLeagueItems = selectedLeague => {
-  const [items, setItems] = useState({});
+  const [items, setItems] = useItems();
 
   useEffect(() => {
     if (selectedLeague) {
@@ -62,7 +63,7 @@ export const useSelectedLeagueItems = selectedLeague => {
         setItems(fetchedItems);
       });
     }
-  }, [selectedLeague]);
+  }, [selectedLeague, setItems]);
 
   return items;
 };
