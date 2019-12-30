@@ -6,6 +6,7 @@ import {
   typeConfig,
 } from "../functions/poe-ninja";
 import { useEnsureProvider } from "./utils";
+import { deepClone } from "../functions/utils";
 
 const ItemsContext = React.createContext();
 
@@ -41,7 +42,6 @@ export const find = (items, league, name) => {
 
 const fetchItems = league => {
   const items = {};
-  items[league] = {};
 
   const fetchPromises = Object.entries(typeConfigByCategory())
     .map(([category, categoryItems]) => {
@@ -53,7 +53,7 @@ const fetchItems = league => {
             console.log(
               `Fetched: ${itemsForLeague.lines.length} ${type} items`
             );
-            items[league][type] = itemsForLeague.lines;
+            items[type] = itemsForLeague.lines;
           })
           .catch(error => {
             console.error(`Couldn't fetch items: ${error}`);
@@ -74,10 +74,9 @@ export const useSelectedLeagueItems = selectedLeague => {
     if (selectedLeague && !items[selectedLeague]) {
       console.log(`${selectedLeague} league selected, updating items...`);
       fetchItems(selectedLeague).then(fetchedItems => {
-        const mergedItems = Object.assign(
-          JSON.parse(JSON.stringify(items)),
-          fetchedItems
-        );
+        const mergedItems = Object.assign(deepClone(items), {
+          [selectedLeague]: fetchedItems,
+        });
         setItems(mergedItems);
       });
     }
