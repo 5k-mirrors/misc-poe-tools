@@ -71,13 +71,17 @@ export const useSelectedLeagueItems = selectedLeague => {
   const [items, setItems] = useItems();
 
   React.useEffect(() => {
-    if (selectedLeague) {
+    if (selectedLeague && !items[selectedLeague]) {
       console.log(`${selectedLeague} league selected, updating items...`);
       fetchItems(selectedLeague).then(fetchedItems => {
-        setItems(fetchedItems);
+        const mergedItems = Object.assign(
+          JSON.parse(JSON.stringify(items)),
+          fetchedItems
+        );
+        setItems(mergedItems);
       });
     }
-  }, [selectedLeague, setItems]);
+  }, [items, selectedLeague, setItems]);
 
   return items;
 };
