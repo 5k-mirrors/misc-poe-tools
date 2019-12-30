@@ -22,10 +22,11 @@ export const ItemsProvider = props => {
   return <ItemsContext.Provider value={value} {...props} />;
 };
 
-export const find = (items, league, name) => {
+// This might be called in a loop so it cannot `useItems`, has to receive them
+export const find = (items, name) => {
   let foundItem;
   for (const [type, details] of Object.entries(typeConfig())) {
-    for (const item of items[league][type]) {
+    for (const item of items[type]) {
       if (item[details.name_key] === name) {
         foundItem = item;
         foundItem.type = type;
@@ -82,5 +83,5 @@ export const useSelectedLeagueItems = selectedLeague => {
     }
   }, [items, selectedLeague, setItems]);
 
-  return items;
+  return items[selectedLeague];
 };

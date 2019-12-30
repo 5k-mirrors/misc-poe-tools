@@ -3,17 +3,18 @@ import PropTypes from "prop-types";
 import { comparisons } from "../functions/config";
 import { comparePrice, cost } from "../functions/compareItems";
 import { useSelectedLeagueItems } from "../contexts/items";
+import { isDefined } from "../functions/utils";
 
 export const Comparisons = ({ selectedLeague }) => {
   const items = useSelectedLeagueItems(selectedLeague);
   const comparisonsByGroup = comparisons();
 
   const dataAvailable = () => {
-    return selectedLeague && items && items[selectedLeague];
+    return isDefined(items);
   };
 
   const compareText = (base, compare) => {
-    const comparison = comparePrice(items, selectedLeague, base, compare);
+    const comparison = comparePrice(items, base, compare);
 
     if (!comparison) {
       return "N/A";
@@ -22,7 +23,7 @@ export const Comparisons = ({ selectedLeague }) => {
   };
 
   const costText = names => {
-    const text = cost(items, selectedLeague, names);
+    const text = cost(items, names);
 
     if (!text) {
       return "N/A";

@@ -7,3 +7,6 @@ export const deepClone = obj => {
     return {};
   }
 };
+
+export const isDefined = value =>
+  typeof value !== "undefined" && value !== null;
