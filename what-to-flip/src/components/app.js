@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelectedLeague } from "./leagues";
-import { ItemsProvider } from "../contexts/itemsContext";
+import { ItemsProvider } from "../contexts/items";
 import { Comparisons } from "./comparisons";
 
 const App = () => {

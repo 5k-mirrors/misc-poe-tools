@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { comparisons } from "../functions/config";
-import { useSelectedLeagueItems, comparePrice, cost } from "./items";
+import { comparePrice, cost } from "../functions/compareItems";
+import { useSelectedLeagueItems } from "../contexts/items";
 
 export const Comparisons = ({ selectedLeague }) => {
   const items = useSelectedLeagueItems(selectedLeague);
