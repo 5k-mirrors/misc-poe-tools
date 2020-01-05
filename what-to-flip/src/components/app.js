@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelectedLeague } from "./leagues";
 import { ItemsProvider } from "../contexts/items";
+import { SingleExecutionLockProvider } from "../contexts/utils";
 import { Comparisons } from "./comparisons";
 
 const App = () => {
@@ -26,9 +27,11 @@ const App = () => {
         ))}
       </select>
 
-      <ItemsProvider>
-        <Comparisons selectedLeague={selectedLeague}></Comparisons>
-      </ItemsProvider>
+      <SingleExecutionLockProvider>
+        <ItemsProvider>
+          <Comparisons selectedLeague={selectedLeague}></Comparisons>
+        </ItemsProvider>
+      </SingleExecutionLockProvider>
     </div>
   );
 };

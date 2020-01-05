@@ -5,7 +5,7 @@ import {
   typeConfigByCategory,
   typeConfig,
 } from "../functions/poe-ninja";
-import { useEnsureProvider } from "./utils";
+import { useEnsureProvider, useSingleExecutionLock } from "./utils";
 import { deepClone } from "../functions/utils";
 
 const ItemsContext = React.createContext();
@@ -70,9 +70,12 @@ const fetchItems = league => {
 
 export const useSelectedLeagueItems = selectedLeague => {
   const [items, setItems] = useItems();
+  const fetchAllowed = useSingleExecutionLock(selectedLeague);
 
   React.useEffect(() => {
-    if (selectedLeague && !items[selectedLeague]) {
+    if (!selectedLeague) return;
+
+    if (!items[selectedLeague] && fetchAllowed) {
       console.log(`${selectedLeague} league selected, updating items...`);
       fetchItems(selectedLeague).then(fetchedItems => {
         const mergedItems = Object.assign(deepClone(items), {
@@ -81,7 +84,7 @@ export const useSelectedLeagueItems = selectedLeague => {
         setItems(mergedItems);
       });
     }
-  }, [items, selectedLeague, setItems]);
+  }, [fetchAllowed, items, selectedLeague, setItems]);
 
   return items[selectedLeague];
 };
