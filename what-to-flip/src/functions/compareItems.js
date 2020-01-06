@@ -1,16 +1,9 @@
 import { typeConfig } from "./poe-ninja";
-import { find } from "../contexts/items";
 
-export const cost = (items, names) => {
-  const foundItems = names.map(name => {
-    return find(items, name);
-  });
-
-  if (foundItems.some(item => item === undefined)) return null;
-
+export const cost = items => {
   let value = 0;
 
-  for (const item of foundItems) {
+  for (const item of items) {
     const compareKey = typeConfig()[item.type].compare_key;
     value += item[compareKey];
   }
@@ -18,20 +11,7 @@ export const cost = (items, names) => {
   return Math.round(value);
 };
 
-export const comparePrice = (items, baseNames, compareNames) => {
-  const baseItems = baseNames.map(baseName => {
-    return find(items, baseName);
-  });
-  const compareItems = compareNames.map(compareName => {
-    return find(items, compareName);
-  });
-
-  if (
-    baseItems.some(item => item === undefined) ||
-    compareItems.some(item => item === undefined)
-  )
-    return null;
-
+export const comparePrice = (baseItems, compareItems) => {
   let value = 0;
 
   for (const baseItem of baseItems) {

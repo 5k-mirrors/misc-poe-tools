@@ -22,8 +22,8 @@ export const ItemsProvider = props => {
   return <ItemsContext.Provider value={value} {...props} />;
 };
 
-// This might be called in a loop so it cannot `useItems`, has to receive them
-export const find = (items, name) => {
+const find = (items, name) => {
+  if (!items) return null;
   let foundItem;
   for (const [type, details] of Object.entries(typeConfig())) {
     for (const item of items[type]) {
@@ -76,7 +76,7 @@ export const useSelectedLeagueItems = selectedLeague => {
     if (!selectedLeague) return;
 
     if (!items[selectedLeague] && fetchAllowed) {
-      console.log(`${selectedLeague} league selected, updating items...`);
+      console.log(`${selectedLeague} league selected, fetching items...`);
       fetchItems(selectedLeague).then(fetchedItems => {
         const mergedItems = Object.assign(deepClone(items), {
           [selectedLeague]: fetchedItems,
@@ -87,4 +87,11 @@ export const useSelectedLeagueItems = selectedLeague => {
   }, [fetchAllowed, items, selectedLeague, setItems]);
 
   return items[selectedLeague];
+};
+
+export const useFindItems = (league, names) => {
+  const items = useSelectedLeagueItems(league);
+  return names.map(name => {
+    return find(items, name);
+  });
 };

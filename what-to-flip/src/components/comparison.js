@@ -1,56 +1,50 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { comparePrice, cost } from "../functions/compareItems";
-import { useSelectedLeagueItems } from "../contexts/items";
+import { useFindItems } from "../contexts/items";
 import { isDefined } from "../functions/utils";
 
-// TODO: if this is a function component only using a hook, it might be alright to render these in a loop
 export const Comparison = ({ selectedLeague, comparison }) => {
-  console.log(
-    `Using items from ${selectedLeague} league to compare ${JSON.stringify(
-      comparison
-    )}`
-  );
-  const items = useSelectedLeagueItems(selectedLeague);
+  const useCompareText = (baseNames, compareNames) => {
+    const baseItems = useFindItems(selectedLeague, baseNames);
+    const compareItems = useFindItems(selectedLeague, compareNames);
 
-  const dataAvailable = () => {
-    return isDefined(items);
-  };
+    let text;
 
-  const compareText = (base, compare) => {
-    const priceComparison = comparePrice(items, base, compare);
-
-    if (!priceComparison) {
-      return "N/A";
+    if (baseItems.concat(compareItems).some(item => !isDefined(item))) {
+      text = "N/A";
+    } else {
+      text = comparePrice(baseItems, compareItems);
     }
-    return priceComparison;
-  };
 
-  const costText = names => {
-    const text = cost(items, names);
-
-    if (!text) {
-      return "N/A";
-    }
     return text;
   };
 
-  const comparisonText = () => {
-    let text = `${comparison.name}: `;
+  const useCostText = names => {
+    const pieces = names.length;
+    const items = useFindItems(selectedLeague, names);
 
-    if (!dataAvailable()) {
-      text += "?";
-      return text;
+    let text;
+    if (pieces === 0) {
+      text = "";
+    } else if (items.some(item => !isDefined(item))) {
+      text = "N/A";
+    } else {
+      text = `, cost: ${cost(items)} chaos, pieces: ${pieces}`;
     }
 
-    text += `${compareText(comparison.base, comparison.compare)} chaos profit`;
+    return text;
+  };
 
-    const pieces = comparison.compare.length;
+  const ComparisonText = () => {
+    let text = `${comparison.name}: `;
 
-    if (pieces !== 0)
-      text += `, cost: ${costText(
-        comparison.compare
-      )} chaos, pieces: ${pieces}`;
+    text += `${useCompareText(
+      comparison.base,
+      comparison.compare
+    )} chaos profit`;
+
+    text += useCostText(comparison.compare);
 
     if (comparison.comment) {
       text += ` (${comparison.comment})`;
@@ -59,7 +53,7 @@ export const Comparison = ({ selectedLeague, comparison }) => {
     return text;
   };
 
-  return <label>{comparisonText(comparison)}</label>;
+  return <label>{ComparisonText()}</label>;
 };
 
 Comparison.propTypes = {
