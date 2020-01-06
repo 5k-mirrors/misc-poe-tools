@@ -8,6 +8,9 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:react/recommended",
   ],
+  plugins: [
+    "react-hooks",
+  ],
   rules: {
     "linebreak-style": ["error", (process.platform === "win32" ? "windows" : "unix")], // https://stackoverflow.com/q/39114446/2771889
     "import/prefer-default-export": 0, // https://stackoverflow.com/q/54245654/2771889
@@ -28,6 +31,8 @@ module.exports = {
         message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
       },
     ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
   },
   settings: {
     react: {

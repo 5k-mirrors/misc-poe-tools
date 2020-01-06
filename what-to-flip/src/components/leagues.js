@@ -1,9 +1,7 @@
-import { leaguesApi } from "./config";
-import { fetchJSON } from "./http";
+import { useState, useEffect } from "react";
 
-export const metaLeagues = () => {
-  return ["Temp SC", "Temp HC", "Standard", "Hardcore"];
-};
+import { leaguesApi } from "../functions/config";
+import { fetchJSON } from "../functions/http";
 
 const mapToMetaLeagues = leagues => {
   const tempLeagues = leagues.filter(leagueHash => {
@@ -37,7 +35,7 @@ const mapToMetaLeagues = leagues => {
   };
 };
 
-export const fetchLeagues = () => {
+const fetchLeagues = () => {
   return fetchJSON(leaguesApi())
     .then(leagues => {
       return mapToMetaLeagues(leagues);
@@ -45,4 +43,30 @@ export const fetchLeagues = () => {
     .catch(error => {
       console.error(`Couldn't fetch leagues: ${error}`);
     });
+};
+
+export const useSelectedLeague = () => {
+  const [leagues, setLeagues] = useState({});
+  useEffect(() => {
+    fetchLeagues().then(fetchedLeagues => {
+      console.log(`Leagues: ${JSON.stringify(fetchedLeagues)}`);
+      setLeagues(fetchedLeagues);
+    });
+  }, []);
+
+  const [selectedMetaLeague, setSelectedMetaLeague] = useState("Temp SC");
+
+  const [selectedLeague, setSelectedLeague] = useState();
+  useEffect(() => {
+    setSelectedLeague(leagues[selectedMetaLeague]);
+  }, [leagues, selectedMetaLeague]);
+
+  const metaLeagues = ["Temp SC", "Temp HC", "Standard", "Hardcore"];
+
+  return {
+    metaLeagues,
+    selectedMetaLeague,
+    selectedLeague,
+    setSelectedMetaLeague,
+  };
 };
