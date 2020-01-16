@@ -3,7 +3,7 @@ import React from "react";
 export const useEnsureProvider = context => {
   const ctx = React.useContext(context);
 
-  if (typeof ctx === "undefined") {
+  if (!ctx) {
     throw new Error(
       `${context.displayName} cannot be used outside the provider.`
     );
